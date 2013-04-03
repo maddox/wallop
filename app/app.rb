@@ -72,7 +72,7 @@ EventMachine.run do
 
         session[:last_read] = Time.now
 
-        send_file("#{session[:channel]}.m3u8")
+        send_file(File.join(Wallop.transcoding_path, "#{session[:channel]}.m3u8"))
       end
 
       get %r{/(\d+.ts)} do
