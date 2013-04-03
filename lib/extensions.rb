@@ -1,3 +1,7 @@
+class ::Logger
+  alias_method :write, :<<
+end
+
 module TOML
   class Transformer < ::Parslet::Transform
     # Utility to properly handle escape sequences in parsed string.
