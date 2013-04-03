@@ -2,6 +2,7 @@ EventMachine.run do
   module Wallop
     class App < Sinatra::Base
       enable :logging
+      use Rack::CommonLogger, Wallop.logger
 
       configure do
         mime_type :m3u8, 'application/x-mpegURL'
