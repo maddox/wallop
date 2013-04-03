@@ -37,6 +37,8 @@ module Wallop
 
   def self.sweep_sessions
     sessions.each do |key, session|
+      Wallop.logger.info "CHECKING SESSION - #{session.inspect}"
+
       # check the status of the stream and if its ready to stream yet
       # If it isn't ready, check to see if it is ready
       if !session[:ready]
