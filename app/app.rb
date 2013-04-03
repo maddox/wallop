@@ -82,5 +82,5 @@ EventMachine.run do
   end
 
   EventMachine.add_periodic_timer(0.5) { Wallop.sweep_sessions }
-  Wallop::App.run!(:port=>Wallop.config['PORT'])
+  Wallop::App.run!(:port=>Wallop.config['port'])
 end

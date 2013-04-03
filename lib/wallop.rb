@@ -13,7 +13,7 @@ module Wallop
   end
 
   def self.ffmpeg_command(channel, resolution='1280x720', bitrate='3000k')
-    %{exec #{config['FFMPEG_PATH']} -i http://#{config['HDHOMERUN_HOST']}:5004/auto/v#{channel} -async 1 -ss 00:00:05 -acodec libfdk_aac -vbr 3 -b:v #{bitrate} -ac 2 -vcodec libx264 -preset superfast  -tune zerolatency  -threads 2 -s #{resolution} -flags -global_header -fflags +genpts -map 0:0 -map 0:1 -hls_time 2 -hls_wrap 40 #{transcoding_path}/#{channel}.m3u8 >/dev/null 2>&1}
+    %{exec #{config['ffmpeg_path']} -i http://#{config['hdhomerun_path']}:5004/auto/v#{channel} -async 1 -ss 00:00:05 -acodec libfdk_aac -vbr 3 -b:v #{bitrate} -ac 2 -vcodec libx264 -preset superfast  -tune zerolatency  -threads 2 -s #{resolution} -flags -global_header -fflags +genpts -map 0:0 -map 0:1 -hls_time 2 -hls_wrap 40 #{transcoding_path}/#{channel}.m3u8 >/dev/null 2>&1}
   end
 
   def self.sessions
@@ -21,7 +21,7 @@ module Wallop
   end
 
   def self.transcoding_path
-    File.expand_path(config['TRANSCODING_PATH'])
+    File.expand_path(config['transcoding_path'])
   end
 
   def self.setup
@@ -74,7 +74,7 @@ module Wallop
   end
 
   def self.hdhomerun_lineup_url(subscribed_only=false)
-    "http://#{config['HDHOMERUN_HOST']}/lineup.json?show=#{subscribed_only ? "subscribed" : "all" }"
+    "http://#{config['hdhomerun_host']}/lineup.json?show=#{subscribed_only ? "subscribed" : "all" }"
   end
 
   def self.lineup(subscribed_only=false)
@@ -82,7 +82,7 @@ module Wallop
   end
 
   def self.stream_url_for_channel(channel)
-    "http://#{config['HDHOMERUN_HOST']}:5004/auto/v#{channel}"
+    "http://#{config['hdhomerun_host']}:5004/auto/v#{channel}"
   end
 
 end
