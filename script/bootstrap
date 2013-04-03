@@ -2,5 +2,7 @@
 
 set -e
 
+script/splash
+
 echo "==> Installing gem dependencies…"
 bundle install --binstubs --local --path vendor/gems --quiet
