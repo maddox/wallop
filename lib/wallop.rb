@@ -46,7 +46,7 @@ module Wallop
       # check to see when the last time the stream was accessed
       # if it was longer than 60 seconds, kill the session
       if session[:last_read].to_i < Time.now.to_i - 60
-        logger.info "KILLING SESSION - #{key} - #{session[:pid]}"
+        Wallop.logger.info "KILLING SESSION - #{key} - #{session[:pid]}"
         if Process.kill('QUIT', session[:pid])
           Process::waitpid(session[:pid])
           cleanup_channel(key)
@@ -54,7 +54,7 @@ module Wallop
         end
       else
         if Process::waitpid(session[:pid], Process::WNOHANG)
-          logger.info "SESSSION COMPLETED - CLEANING UP - #{key} - #{session[:pid]}"
+          Wallop.logger.info "SESSSION COMPLETED - CLEANING UP - #{key} - #{session[:pid]}"
           cleanup_channel(key)
           sessions.delete(key)
         end
