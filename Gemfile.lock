@@ -30,7 +30,7 @@ GEM
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
     tilt (1.3.5)
-    toml (0.0.3)
+    toml (0.0.4)
       parslet
 
 PLATFORMS
@@ -43,4 +43,4 @@ DEPENDENCIES
   sinatra (~> 1.3.5)
   sinatra-contrib (~> 1.3.2)
   thin (~> 1.5.0)
-  toml (~> 0.0.3)
+  toml (~> 0.0.4)
