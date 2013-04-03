@@ -47,7 +47,7 @@ namespace :wallop do
           <key>KeepAlive</key>
           <true/>
           <key>WorkingDirectory</key>
-          <string>#{File.join(File.dirname(__FILE__), '..', '..')}</string>
+          <string>#{File.join(File.dirname(__FILE__))}</string>
           <key>StandardErrorPath</key>
           <string>#{log_path}</string>
           <key>StandardOutPath</key>
