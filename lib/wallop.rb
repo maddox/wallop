@@ -32,6 +32,7 @@ module Wallop
 
     # roll the logs
     mv(LOG_PATH, OLD_LOG_PATH) if File.exists?(LOG_PATH)
+    Wallop.logger.info "Starting up"
   end
 
   def self.sweep_sessions
