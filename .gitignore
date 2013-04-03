@@ -16,3 +16,4 @@ vendor/gems
 vendor/bundle
 .DS_Store
 log
+config/config.toml
