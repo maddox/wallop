@@ -37,12 +37,15 @@ module Wallop
 
   def self.sweep_sessions
     sessions.each do |key, session|
-      Wallop.logger.info "CHECKING SESSION - #{session.inspect}"
-
       # check the status of the stream and if its ready to stream yet
       # If it isn't ready, check to see if it is ready
       if !session[:ready]
-        session[:ready] = true if File.exists?(File.join(transcoding_path, "#{session[:channel]}.m3u8"))
+        Wallop.logger.info "CHECKING READY STATUS OF SESSION - #{session.inspect}"
+        if File.exists?(File.join(transcoding_path, "#{session[:channel]}.m3u8"))
+          Wallop.logger.info "SESSION READY - #{session.inspect}"
+          session[:ready] = true
+        end
+
       end
 
       # check to see when the last time the stream was accessed
