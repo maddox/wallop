@@ -51,12 +51,11 @@ EventMachine.run do
       end
 
       get '/channels/:channel/stop' do
-        Wallop.logger.info "Stopping channel #{params[:channel]}"
-
         session = Wallop.sessions[params[:channel]]
         halt 404 if !session
 
         if Process.kill('QUIT', session[:pid])
+          Wallop.logger.info "MANUALLY STOPPING SESSION - #{session[:channel]} - #{session[:pid]}"
           Process::waitpid(session[:pid])
           Wallop.cleanup_channel(session[:channel])
           Wallop.sessions.delete(session[:channel])
