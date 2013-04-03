@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+script/bootstrap
+
+echo "==> Configuring..."
+cp config/config.example.toml config/config.toml
+
+echo "\nWallop is ready to use! Just run script/server\n"
+
