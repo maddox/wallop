@@ -1,0 +1,6 @@
+#!/bin/sh
+
+set -e
+
+echo "==> Installing gem dependencies…"
+bundle install --binstubs --local --path vendor/gems --quiet
