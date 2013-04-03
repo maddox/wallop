@@ -4,6 +4,12 @@ Wallop is a transcoding server for your HDHomeRun Prime.
 
 Wallop lets you watch TV streams on your iPhone, iPad, Roku, Web, Android device. Even away from home.
 
+## Warning
+
+Wallop is still very new, and because of that, it's unstable.
+
+Not unstable as in crash prone, unstable as in lots will change. Not a lot has been decided on, so things could change any time. Keep an eye on the [pull requests](https://github.com/maddox/wallop/pulls) in this repo to see what is new and what has changed.
+
 ## Why?
 
 The HDHomeRun Prime is an amazing CableCard TV tuner. It has 3 tuners, and makes its tuned content available over your local network. It even lets you capture these streams via HTTP with a simple CURL command!
