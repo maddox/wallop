@@ -15,6 +15,7 @@ RACK_ENV = ENV['RACK_ENV'] || 'development'
 
 $LOAD_PATH.unshift File.expand_path("#{RACK_ROOT}/lib")
 
+require 'extensions'
 require 'wallop'
 
 Wallop.setup
