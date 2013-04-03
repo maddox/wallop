@@ -16,7 +16,7 @@ EventMachine.run do
 
       get '/channels' do
         @channels = Wallop.lineup
-        @channels.map{|c| %{<p><a href="/channels/#{c['GuideNumber']}/tune?wait=true">#{c['GuideNumber']} - #{c['GuideName']}</a></p>}}.join
+        erb :channels
       end
 
       get '/channels/:channel/tune' do
