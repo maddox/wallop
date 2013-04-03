@@ -76,7 +76,7 @@ EventMachine.run do
       end
 
       get %r{/(\d+.ts)} do
-        send_file(params[:captures].first)
+        send_file(File.join(Wallop.transcoding_path, params[:captures].first))
       end
     end
   end
