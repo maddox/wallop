@@ -27,7 +27,7 @@ module Wallop
   def self.setup
     # create log and transcoding directories
     ["log", transcoding_path].each do |dir|
-      mkdir_p(dir) unless Dir.exists?(dir)
+      mkdir_p(dir) unless File.directory?(dir)
     end
 
     # roll the logs
