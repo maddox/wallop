@@ -35,7 +35,7 @@ Wallop has only been tested running on OS X, though its just Ruby and FFMPEG, so
 
 You should have a modern version of FFMPEG compiled and installed. I'd suggest you just compile a fresh version from the most recent source. [Here](http://ffmpeg.org/trac/ffmpeg/wiki/MacOSXCompilationGuide) are good instructions on how get FFMPEG built for OS X. It's not that bad!
 
-### Installing and Starting
+### Quickie Set Up
 
 Wallop is a simple Ruby server. All you need to do is clone it down, install its dependencies, and start it up!
 
@@ -48,6 +48,56 @@ script/setup
 script/server
 open http://127.0.0.1:8888
 ```
+
+### Starting Server
+
+To start the server after you've already set it up, just run this:
+
+```sh
+script/server
+open http://127.0.0.1:8888
+```
+
+### Installing/Uninstalling
+
+You can optionally use [launchd](http://en.wikipedia.org/wiki/Launchd) in OS X to start Wallop on boot. Not only will this start the server when the computer boots, but it will keep it running in case it crashes.
+
+I'd suggest you make sure Wallop is running normally via `script/server` before you install it this way.
+
+#### Install
+
+This will install the script to launch it at boot and keep it alive. If you seem to be having trouble, you can tail the log for the install at `~/Library/Logs/wallop.log`.
+
+```sh
+script/install
+```
+
+#### Uninstall
+
+This will remove the script from launchd.
+
+```sh
+script/uninstall
+```
+
+#### Restart
+
+This will restart the server. If you update the server, you'll want to run this to get the updates running.
+
+```sh
+script/restart
+```
+### Updating
+
+If you want to update Wallop, just do a normal `git pull` on the repo you cloned down. Watch the development via this repo to see if there's anything you want to update for.
+
+After updating the code, run:
+
+```sh
+script/update
+```
+
+This will fullfill any new dependencies as well as anything else that needs to happen after an update.
 
 ### Configuring
 
