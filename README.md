@@ -44,7 +44,7 @@ Be sure you have bundler installed first. `gem install bundler` Bundler is a dep
 ```sh
 git clone https://github.com/maddox/wallop.git
 cd wallop
-script/bootstrap
+script/setup
 script/server
 open http://127.0.0.1:8888
 ```
