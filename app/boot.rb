@@ -4,6 +4,7 @@ require 'open-uri'
 require 'logger'
 
 require 'sinatra/base'
+require 'sinatra/reloader'
 require 'posix/spawn'
 require 'eventmachine'
 require 'thin'

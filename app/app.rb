@@ -1,6 +1,7 @@
 EventMachine.run do
   module Wallop
     class App < Sinatra::Base
+      register Sinatra::Reloader if RACK_ENV == 'development'
       enable :logging
       use Rack::CommonLogger, Wallop.logger
 
