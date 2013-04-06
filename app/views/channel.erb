@@ -1,3 +1,5 @@
-<video id="my_video_1" class="video-js vjs-default-skin" preload="auto" width="640" height="360" data-setup="{}" controls>
-  <source src="http://desky.local:8888/channels/512.m3u8" type='application/vnd.apple.mpegurl'>
+<center>
+<video id="video-player" class="video-js vjs-default-skin" preload="auto" width="640" height="360" data-setup="{}" autoplay controls data-play-url="/channels/<%= @channel %>.m3u8" data-status-url="/channels/<%= @channel %>/status" %>">
+  <source src="/channels/<%= @channel %>.m3u8" type='application/vnd.apple.mpegurl'>
 </video>
+</center>
