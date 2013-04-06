@@ -36,7 +36,7 @@ namespace :wallop do
           <string>com.wallop.plist</string>
           <key>ProgramArguments</key>
           <array>
-            <string>script/server</string>
+            <string>script/start</string>
           </array>
           <key>OnDemand</key>
           <false/>

@@ -51,7 +51,7 @@ Be sure you have bundler installed first. `gem install bundler` Bundler is a dep
 git clone https://github.com/maddox/wallop.git
 cd wallop
 script/setup
-script/server
+script/start
 open http://127.0.0.1:8888
 ```
 
@@ -60,7 +60,7 @@ open http://127.0.0.1:8888
 To start the server after you've already set it up, just run this:
 
 ```sh
-script/server
+script/start
 open http://127.0.0.1:8888
 ```
 
@@ -68,7 +68,7 @@ open http://127.0.0.1:8888
 
 You can optionally use [launchd](http://en.wikipedia.org/wiki/Launchd) in OS X to start Wallop on boot. Not only will this start the server when the computer boots, but it will keep it running in case it crashes.
 
-I'd suggest you make sure Wallop is running normally via `script/server` before you install it this way.
+I'd suggest you make sure Wallop is running normally via `script/start` before you install it this way.
 
 #### Install
 
