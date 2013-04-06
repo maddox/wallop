@@ -76,12 +76,13 @@ module Wallop
     rm(Dir.glob("#{transcoding_path}/#{channel}*.ts"))
   end
 
-  def self.hdhomerun_lineup_url(subscribed_only=false)
-    "http://#{config['hdhomerun_host']}/lineup.json?show=#{subscribed_only ? "subscribed" : "all" }"
+  def self.hdhomerun_lineup_url
+    "http://#{config['hdhomerun_host']}/lineup.json?show=subscribed"
   end
 
-  def self.lineup(subscribed_only=false)
-    JSON.parse(open(hdhomerun_lineup_url(subscribed_only)).read)
+  def self.lineup
+    JSON.parse(open(hdhomerun_lineup_url).read)
+  end
   end
 
   def self.stream_url_for_channel(channel)
