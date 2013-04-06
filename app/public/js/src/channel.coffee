@@ -21,6 +21,7 @@ $ ->
     , 'json')
 
   if videoPlayerExists()
+    videoPlayer().play()
     checkStatus()
     timer = setInterval ->
       checkStatus()
