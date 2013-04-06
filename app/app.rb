@@ -38,9 +38,8 @@ EventMachine.run do
           until Wallop.sessions[params[:channel]][:ready] do
             sleep(0.5)
           end
+          redirect "/channels/#{channel}.m3u8"
         end
-
-        redirect "/channels/#{channel}.m3u8"
       end
 
       get '/channels/:channel/status' do
