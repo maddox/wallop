@@ -14,8 +14,6 @@ $ ->
 
   checkStatus = ->
     $.get(statusUrl(), '', (data)->
-      console.log(timer)
-      console.log(data.ready)
       if data.ready
         clearInterval(timer)
         videoPlayer().src(playUrl())
