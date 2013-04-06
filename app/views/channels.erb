@@ -1,56 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Wallop</title>
-    <meta charset='utf-8'>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-    <link href='/css/bootstrap-responsive.min.css' rel='stylesheet' type='text/css'>
-    <link href='/css/styles.css' rel='stylesheet' type='text/css'>
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-  </head>
-
-  <body>
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="/">
-        Wallop
-      </a>
-      <ul class="nav">
-        <li><a href="#">Favorites</a></li>
-        <li><a href="#">HD</a></li>
-        <li><a href="#">All</a></li>
-      </ul>
-
-    </div>
-  </div>
-</div>
-
-<div class="container">
-  <table class="table table-bordered table-striped">
-    <tbody>
-      <% @channels.each do |channel| %>
-        <tr>
-          <td>
-            <a href="/channels/<%= channel['GuideNumber'] %>/tune?wait=true">
-              <%= "#{channel['GuideNumber']} - #{channel['GuideName']}" %>
-            </a>
-            <i class="icon-star-empty pull-right"></i>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-</div>
-
-
-
-
-
-
-
-</body>
-</html>
+<video id="my_video_1" class="video-js vjs-default-skin" preload="auto" width="640" height="360" data-setup="{}" controls>
+  <source src="http://desky.local:8888/channels/512.m3u8" type='application/vnd.apple.mpegurl'>
+</video>
+<table class="table table-bordered table-striped">
+  <tbody>
+    <% @channels.each do |channel| %>
+      <tr>
+        <td>
+          <a class="channel" href="/channels/<%= channel['GuideNumber'] %>/tune?wait=true" data-channel="<%= channel['GuideNumber'] %>">
+            <%= "#{channel['GuideNumber']} - #{channel['GuideName']}" %>
+          </a>
+          <i class="icon-star-empty pull-right"></i>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
