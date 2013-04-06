@@ -15,7 +15,16 @@ EventMachine.run do
       end
 
       get '/channels' do
-        @channels = Wallop.lineup
+
+        case params[:type]
+        when /hd/i
+          @channels = Wallop.hd_lineup
+        when /favorites/i
+          @channels = []
+        else
+          @channels = Wallop.lineup
+        end
+
         erb :channels
       end
 
