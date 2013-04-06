@@ -20,9 +20,10 @@ $ ->
         videoPlayer().play()
     , 'json')
 
-  checkStatus()
-  timer = setInterval ->
+  if videoPlayerExists()
     checkStatus()
-  , 1000 if videoPlayerExists()
+    timer = setInterval ->
+      checkStatus()
+    , 1000
 
 
