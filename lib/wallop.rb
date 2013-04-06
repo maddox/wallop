@@ -83,6 +83,9 @@ module Wallop
   def self.lineup
     JSON.parse(open(hdhomerun_lineup_url).read)
   end
+
+  def self.hd_lineup
+    lineup.delete_if{|l| l['GuideNumber'].to_i < config['hd_start']}
   end
 
   def self.stream_url_for_channel(channel)
