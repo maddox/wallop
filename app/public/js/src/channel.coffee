@@ -1,30 +1,66 @@
 $ ->
 
   videoPlayer = ->
-    _V_("video-player")
-
-  videoPlayerExists = ->
-    $('.video-js')[0]?
+    $("#video-player")[0]
 
   statusUrl = ->
-    $('video').data('status-url')
+    $('#video-player').data('status-url')
 
   playUrl = ->
-    $('video').data('play-url')
+    $('#video-player').data('play-url')
+
+  startLoading = (title=null, message=null) ->
+    spinOpts = {
+      className: 'spinner', # The CSS class to assign to the spinner
+      top: '2px', # Top position relative to parent in px
+    }
+
+    $('.alert').spin(spinOpts)
+
+    $('.alert h4').html(title)
+    $('.alert').append(message)
+
+    $('.alert').show()
+
+  stopLoading = (title=null, message=null) ->
+    $('.alert').spin(false)
+
+    $('.alert h4').html(title)
+    $('.alert').append(message)
+
+    $('.alert').hide() if not title? and not message?
+
+  play = ->
+    deviceAgent = navigator.userAgent.toLowerCase()
+    console.log(deviceAgent)
+    agentID = deviceAgent.match(/(iphone|ipod|ipad)/)
+    console.log(agentID)
+
+    $(videoPlayer()).show()
+    videoPlayer().src = playUrl()
+    videoPlayer().play()
+
+    if agentID && agentID[1] == 'iphone'
+      window.location.href = playUrl()
+
 
   checkStatus = ->
-    $.get(statusUrl(), '', (data)->
-      if data.ready
-        clearInterval(timer)
-        videoPlayer().src(playUrl())
-        videoPlayer().play()
-    , 'json')
+    $.ajax statusUrl(),
+        type: 'get'
+        dataType: 'json'
+        beforeSend: (jqXHR) ->
+          jqXHR.setRequestHeader("Accept", "application/json")
+          startLoading('Preparing stream...')
+        success: (data, textStatus, jqXHR) ->
+          console.log(data)
+          if data.ready
+            clearInterval(timer)
+            stopLoading('Stream is ready!', 'The stream is ready to play.')
+            play()
 
-  if videoPlayerExists()
-    videoPlayer().play()
+
+  if videoPlayer()?
     checkStatus()
     timer = setInterval ->
       checkStatus()
     , 1000
-
-
