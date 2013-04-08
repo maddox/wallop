@@ -1,3 +1,11 @@
+<% if @channels.size == 0 && params[:type] == 'favorites' %>
+  <div class="alert alert-block alert-info">
+    <h4>No Favorite Channels Found</h4>
+    It doesn't look like you've picked any favorite channels. To make a channel a favorite, click the star next to it's name.
+  </div>
+<% end %>
+
+<% if @channels.size > 0 %>
 <table class="table table-bordered table-striped">
   <tbody>
     <% @channels.each do |channel| %>
@@ -12,3 +20,4 @@
     <% end %>
   </tbody>
 </table>
+<% end %>
