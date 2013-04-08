@@ -5,3 +5,12 @@ body{
 @media screen and (max-width: 980px) {
   body { padding-top: 0px; }
 }
+
+
+.spinner{
+  margin-bottom: 60px;
+}
+
+video{
+  max-width: 320px;
+}
