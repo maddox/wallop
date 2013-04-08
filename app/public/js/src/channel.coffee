@@ -32,9 +32,7 @@ $ ->
 
   play = ->
     deviceAgent = navigator.userAgent.toLowerCase()
-    console.log(deviceAgent)
     agentID = deviceAgent.match(/(iphone|ipod|ipad)/)
-    console.log(agentID)
 
     $(videoPlayer()).show()
     videoPlayer().src = playUrl()
