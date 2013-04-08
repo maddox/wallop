@@ -27,9 +27,9 @@
             Wallop
           </a>
           <ul class="nav">
-            <li><a href="/channels?type=favorites">Favorites</a></li>
-            <li><a href="/channels?type=hd">HD</a></li>
-            <li><a href="/channels">All</a></li>
+            <li class="<%= 'active' if params[:type] == 'favorites' %>"><a href="/channels?type=favorites">Favorites</a></li>
+            <li class="<%= 'active' if params[:type] == 'hd' %>"><a href="/channels?type=hd">HD</a></li>
+            <li class="<%= 'active' if params[:type] == nil %>"><a href="/channels">All</a></li>
           </ul>
 
         </div>
