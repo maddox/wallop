@@ -151,7 +151,7 @@ It has a full API that lets you kick off the transcode, pick your resolution and
 
 ### Via Web
 
-Wallop DOES have some web views that you can use to start a stream though. Just open the server with your browser to see a list of channels. Clicking one will start the transcode and when it's ready, it'll redirect you to the stream.
+Wallop DOES have some web views that you can use to watch a stream though. Just open the server with your browser to see a list of channels. Tap/click a channel to start the stream.
 
 Just point your browser to http://localhost:8888, or whatever host it's on.
 
