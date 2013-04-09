@@ -119,16 +119,16 @@ port = "8888"
 hd_start = 500
 ```
 
-##### `HDHOMERUN_HOST`
+##### `hdhomerun_host`
 The IP address of your HDHomeRun Prime on your network.
 
-##### `FFMPEG_PATH`
+##### `ffmpeg_path`
 The path to your FFMPEG binary.
 
-##### `TRANSCODING_PATH`
+##### `transcoding_path`
 The path where Wallop will write the temporary segments when transcoding and streaming the tv streams. This defaults to the `tmp` directory in Wallops own directory. If you want these files written somewhere else, you can change that here.
 
-##### `PORT`
+##### `port`
 The port that the server will run on.
 
 ##### `hd_start`
