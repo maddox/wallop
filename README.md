@@ -145,7 +145,35 @@ Wallop is more of a tool than a user facing application. It's designed to be use
 
 It has a full API that lets you kick off the transcode, pick your resolution and bitrate, and provides status of the stream. [Read the documentation](/docs) on how to talk to Wallop.
 
+### Via Web
+
 Wallop DOES have some web views that you can use to start a stream though. Just open the server with your browser to see a list of channels. Clicking one will start the transcode and when it's ready, it'll redirect you to the stream.
+
+Just point your browser to http://localhost:8888, or whatever host it's on.
+
+Just tap/click a channel, and it will do it's thing and start streaming.
+
+![](http://cl.ly/image/1s280r02342L/Image%202013.04.09%2011:26:00%20AM.png)
+
+### Favorite Channels
+
+You have LOTS of channels. To alleviate this pain, you can set which ones are your favorites. Just tap/click the star and it will be set as a favorite channel.
+
+This should speed up getting to the channels you want.
+
+### Browser Support
+
+Basically the only browser that is supported right now is Safari. Sorry, Google hates HLS for some reason.
+
+Chrome won't play the HLS stream natively, and [JWPlayer](http://www.longtailvideo.com/jw-player/pricing/) wants $300 per year for their player that will fallback to flash for HLS streams. Even for non-commercial use. :thumbsdown:
+
+* :thumbsup: iPhone (Safari)
+* :thumbsup: iPad (Safari)
+* :thumbsup: OS X (Safari)
+* :thumbsdown: Chrome
+* :question: Android
+
+I don't have any Android devices, nor do I have any experience with them. So your milage may vary. I'd love to hear some feedback via [issues](https://github.com/maddox/wallop/issues)
 
 
 ## Contributing
