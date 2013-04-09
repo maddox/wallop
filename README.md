@@ -157,7 +157,7 @@ Just point your browser to [http://localhost:8888](http://localhost:8888), or wh
 
 Just tap/click a channel, and it will do it's thing and start streaming.
 
-![](http://cl.ly/image/1s280r02342L/Image%202013.04.09%2011:26:00%20AM.png)
+![](http://cl.ly/image/1j1s3J2q0r16/Image%202013.04.09%2012:35:42%20PM.png)
 
 ### Favorite Channels
 
