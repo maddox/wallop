@@ -112,10 +112,11 @@ Wallop is pretty simple, but it does have a couple user configurable settings.
 You can edit these settings via the `config/config.toml` file.
 
 ```toml
-HDHOMERUN_HOST = "192.168.1.13"
-FFMPEG_PATH = "/usr/local/bin/ffmpeg"
-TRANSCODING_PATH = "./tmp"
-PORT = "8888"
+hdhomerun_host = "192.168.1.13"
+ffmpeg_path = "/usr/local/bin/ffmpeg"
+transcoding_path = "./tmp"
+port = "8888"
+hd_start = 500
 ```
 
 ##### `HDHOMERUN_HOST`
@@ -129,6 +130,9 @@ The path where Wallop will write the temporary segments when transcoding and str
 
 ##### `PORT`
 The port that the server will run on.
+
+##### `hd_start`
+The start channel of your HD channels. Most providers start all of their HD channels at a certain number. Providing this number will let you browse JUST your HD channels.
 
 ### Logs
 
