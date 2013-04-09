@@ -14,7 +14,7 @@
           <a class="channel" href="/channels/<%= channel['GuideNumber'] %>/tune?wait=true" data-channel="<%= channel['GuideNumber'] %>">
             <%= "#{channel['GuideNumber']} - #{channel['GuideName']}" %>
           </a>
-          <i class="icon-star-empty pull-right"></i>
+          <a href="#" class="favorite <%= 'starred' if Wallop.favorite_channels.include?(channel['GuideNumber'])%>" data-channel="<%= channel['GuideNumber'] %>"><i class="<%= Wallop.favorite_channels.include?(channel['GuideNumber']) ? 'icon-star' : 'icon-star-empty' %> pull-right"></i></a>
         </td>
       </tr>
     <% end %>
