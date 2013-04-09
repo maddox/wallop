@@ -12,6 +12,9 @@ video{
   height: 360px;
 }
 
+a.favorite{
+  text-decoration: none;
+}
 
 @media screen and (max-width: 980px) {
   body { padding-top: 0px; }
