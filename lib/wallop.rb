@@ -109,6 +109,7 @@ module Wallop
 
   def self.add_favorite_channel(channel)
     favorite_channels << channel unless favorite_channels.include?(channel)
+    favorite_channels.sort!
     save_favorite_channels
   end
 
