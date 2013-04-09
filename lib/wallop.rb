@@ -3,6 +3,7 @@ include FileUtils
 module Wallop
   LOG_PATH = 'log/wallop.log'
   OLD_LOG_PATH = 'log/wallop.old.log'
+  FAVORITE_CHANNELS_PATH = 'config/favorite_channels.json'
 
   def self.logger
     @logger ||= Logger.new(LOG_PATH)
@@ -90,6 +91,36 @@ module Wallop
 
   def self.stream_url_for_channel(channel)
     "http://#{config['hdhomerun_host']}:5004/auto/v#{channel}"
+  end
+
+  def self.favorite_lineup
+    favorite_channels.map{|c| lineup.detect{|l| c == l['GuideNumber']} }
+  end
+
+  def self.favorite_channels
+    @favorite_channels ||= begin
+      if File.exists?(FAVORITE_CHANNELS_PATH)
+        JSON.parse(open(FAVORITE_CHANNELS_PATH).read)
+      else
+        []
+      end
+    end
+  end
+
+  def self.add_favorite_channel(channel)
+    favorite_channels << channel unless favorite_channels.include?(channel)
+    save_favorite_channels
+  end
+
+  def self.remove_favorite_channel(channel)
+    favorite_channels.delete(channel)
+    save_favorite_channels
+  end
+
+  def self.save_favorite_channels
+    open(FAVORITE_CHANNELS_PATH, 'w+') do |f|
+      f.write JSON.dump(favorite_channels)
+    end
   end
 
 end
