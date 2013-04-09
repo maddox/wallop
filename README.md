@@ -134,7 +134,7 @@ The port that the server will run on.
 ##### `hd_start`
 The start channel of your HD channels. Most providers start all of their HD channels at a certain number. Providing this number will let you browse JUST your HD channels.
 
-### Logs
+## Logs
 
 Logs are written out to the `log` directory.
 
