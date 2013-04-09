@@ -14,13 +14,28 @@ EventMachine.run do
         redirect '/channels'
       end
 
+      post '/channels/favorites' do
+        content_type :json
+
+        Wallop.add_favorite_channel(params[:channel])
+        JSON.dump({:status => 200, :message => 'ok'})
+      end
+
+      delete '/channels/favorites' do
+        content_type :json
+
+        Wallop.remove_favorite_channel(params[:channel])
+        JSON.dump({:status => 200, :message => 'ok'})
+      end
+
+
       get '/channels' do
 
         case params[:type]
         when /hd/i
           @channels = Wallop.hd_lineup
         when /favorites/i
-          @channels = []
+          @channels = Wallop.favorite_lineup
         else
           @channels = Wallop.lineup
         end
