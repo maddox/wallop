@@ -153,7 +153,7 @@ It has a full API that lets you kick off the transcode, pick your resolution and
 
 Wallop DOES have some web views that you can use to watch a stream though. Just open the server with your browser to see a list of channels. Tap/click a channel to start the stream.
 
-Just point your browser to http://localhost:8888, or whatever host it's on.
+Just point your browser to [http://localhost:8888](http://localhost:8888), or whatever host it's on.
 
 Just tap/click a channel, and it will do it's thing and start streaming.
 
