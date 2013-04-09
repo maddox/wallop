@@ -11,7 +11,7 @@ EventMachine.run do
       end
 
       get '/' do
-        redirect '/channels'
+        redirect '/channels?type=favorites'
       end
 
       post '/channels/favorites' do
