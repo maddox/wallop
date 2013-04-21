@@ -67,7 +67,7 @@ EventMachine.run do
         JSON.dump(session)
       end
 
-      get '/channels/:channel/stop' do
+      post '/channels/:channel/stop' do
         session = Wallop.sessions[params[:channel]]
         halt 404 if !session
 

@@ -6,7 +6,7 @@ $ ->
     tuneUrl = '/channels/' + channel + '/tune'
     playerUrl = '/channels/' + channel
 
-    $.get(tuneUrl, '', (data)->
+    $.post(tuneUrl, '', (data)->
       window.location.href = playerUrl
       )
 
