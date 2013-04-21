@@ -57,12 +57,6 @@ EventMachine.run do
           Wallop.sessions[params[:channel]] = {:channel => channel, :pid => pid, :ready => false, :last_read => Time.now}
         end
 
-        if params[:wait]
-          until Wallop.sessions[params[:channel]][:ready] do
-            sleep(0.5)
-          end
-          redirect "/channels/#{channel}.m3u8"
-        end
         JSON.dump({:status => 200, :message => 'ok'})
       end
 
