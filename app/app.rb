@@ -81,6 +81,11 @@ EventMachine.run do
         JSON.dump({:status => 200, :message => 'ok'})
       end
 
+      get '/channels/:channel/raw' do
+        redirect Wallop.raw_stream_url_for_channel(params[:channel])
+      end
+
+
       get '/channels/:channel.m3u8' do
         content_type :m3u8
 
