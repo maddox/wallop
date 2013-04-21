@@ -10,27 +10,25 @@ EventMachine.run do
         mime_type :ts, 'video/MP2T'
       end
 
+      before do
+        content_type :json
+      end
+
       get '/' do
         redirect '/channels?type=favorites'
       end
 
       post '/channels/favorites' do
-        content_type :json
-
         Wallop.add_favorite_channel(params[:channel])
         JSON.dump({:status => 200, :message => 'ok'})
       end
 
       delete '/channels/favorites' do
-        content_type :json
-
         Wallop.remove_favorite_channel(params[:channel])
         JSON.dump({:status => 200, :message => 'ok'})
       end
 
-
       get '/channels' do
-
         case params[:type]
         when /hd/i
           @channels = Wallop.hd_lineup
@@ -40,10 +38,11 @@ EventMachine.run do
           @channels = Wallop.lineup
         end
 
-        erb :channels
+        content_type :html; halt erb :channels if request.accept.include?('text/html')
+        JSON.dump({:channels => @channels})
       end
 
-      get '/channels/:channel/tune' do
+      post '/channels/:channel/tune' do
         resolution = params[:resolution] || '1280x720'
         bitrate = params[:bitrate] || '3000k'
 
@@ -64,13 +63,13 @@ EventMachine.run do
           end
           redirect "/channels/#{channel}.m3u8"
         end
+        JSON.dump({:status => 200, :message => 'ok'})
       end
 
       get '/channels/:channel/status' do
         session = Wallop.sessions[params[:channel]]
         halt 404 if !session
 
-        content_type :json
         JSON.dump(session)
       end
 
@@ -85,10 +84,12 @@ EventMachine.run do
           Wallop.sessions.delete(session[:channel])
         end
 
-        "OK"
+        JSON.dump({:status => 200, :message => 'ok'})
       end
 
       get '/channels/:channel.m3u8' do
+        content_type :m3u8
+
         session = Wallop.sessions[params[:channel]]
         halt 404 if !session
 
@@ -100,10 +101,13 @@ EventMachine.run do
       end
 
       get %r{/(\d+.ts)} do
+        content_type :ts
         send_file(File.join(Wallop.transcoding_path, params[:captures].first))
       end
 
       get '/channels/:channel' do
+        content_type :html
+
         @channel = params[:channel]
         erb :channel
       end
