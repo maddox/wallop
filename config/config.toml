@@ -1,0 +1,5 @@
+hdhomerun_host = "192.168.1.13"
+ffmpeg_path = "/usr/local/bin/ffmpeg"
+transcoding_path = "./tmp"
+port = "8888"
+hd_start = 500
