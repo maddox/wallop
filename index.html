@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Wallop by maddox</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Wallop</h1>
+          <h2>A transcoding server for your HDHomeRun Prime</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/maddox/wallop/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/maddox/wallop/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/maddox/wallop" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="zap-wallop-zap" class="anchor" href="#zap-wallop-zap"><span class="octicon octicon-link"></span></a><img class="emoji" title=":zap:" alt=":zap:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/zap.png" height="20" width="20" align="absmiddle"> Wallop <img class="emoji" title=":zap:" alt=":zap:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/zap.png" height="20" width="20" align="absmiddle">
+</h1>
+
+<p>Wallop is a transcoding server for your <a href="http://www.silicondust.com/products/hdhomerun/prime/">HDHomeRun Prime</a>.</p>
+
+<p>Wallop lets you watch TV streams on your iPhone, iPad, Roku, Web, Android device. Even away from home.</p>
+
+<h2>
+<a name="why" class="anchor" href="#why"><span class="octicon octicon-link"></span></a>Why?</h2>
+
+<p>The HDHomeRun Prime is an amazing CableCard TV tuner. It has 3 tuners, and makes its tuned content available over your local network. It even lets you capture these streams via HTTP with a simple CURL command!</p>
+
+<p>The problem is, TV is generally broadcast in MPEG2 at bitrates hovering around 16-20mbps. This causes 3 problems:</p>
+
+<ul>
+<li>These streams are usually too large for WiFi.</li>
+<li>These streams are definitely too large to stream to your mobile device when away from home.</li>
+<li>Basically no modern devices decode MPEG2 in hardware, leaving the devices to do it with CPU.</li>
+</ul><p>This means, as awesome as this device is, and as accessible as the TV streams are, it's still basically useless. It can't stream to your phone, tablet, or even over your WiFi.</p>
+
+<p>The solution is simple. Take these MPEG2 streams and transcode them to h.264 at a lower bitrate. That's what Wallop does.</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Wallop is more of a tool than a user facing application. It's designed to be used in coordination with other things like:</p>
+
+<ul>
+<li>an iPhone app</li>
+<li>an XBMC/Plex addon/channel</li>
+</ul><p>It has a full API that lets you kick off the transcode, pick your resolution and bitrate, and provides status of the stream. <a href="/docs">Read the documentation</a> on how to talk to Wallop.</p>
+
+<h3>
+<a name="via-web" class="anchor" href="#via-web"><span class="octicon octicon-link"></span></a>Via Web</h3>
+
+<p>Wallop DOES have some web views that you can use to watch a stream though. Just open the server with your browser to see a list of channels. Tap/click a channel to start the stream.</p>
+
+<p>Just point your browser to <a href="http://localhost:8888">http://localhost:8888</a>, or whatever host it's on.</p>
+
+<p>Just tap/click a channel, and it will do it's thing and start streaming.</p>
+
+<p><img src="http://cl.ly/image/1j1s3J2q0r16/Image%202013.04.09%2012:35:42%20PM.png" alt=""></p>
+
+<h3>
+<a name="favorite-channels" class="anchor" href="#favorite-channels"><span class="octicon octicon-link"></span></a>Favorite Channels</h3>
+
+<p>You have LOTS of channels. To alleviate this pain, you can set which ones are your favorites. Just tap/click the star and it will be set as a favorite channel.</p>
+
+<p>This should speed up getting to the channels you want.</p>
+
+<h3>
+<a name="browser-support" class="anchor" href="#browser-support"><span class="octicon octicon-link"></span></a>Browser Support</h3>
+
+<p>Basically the only browser that is supported right now is Safari. Sorry, Google hates HLS for some reason.</p>
+
+<p>Chrome won't play the HLS stream natively, and <a href="http://www.longtailvideo.com/jw-player/pricing/">JWPlayer</a> wants $300 per year for their player that will fallback to flash for HLS streams. Even for non-commercial use. <img class="emoji" title=":thumbsdown:" alt=":thumbsdown:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/thumbsdown.png" height="20" width="20" align="absmiddle"></p>
+
+<ul>
+<li>
+<img class="emoji" title=":thumbsup:" alt=":thumbsup:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/thumbsup.png" height="20" width="20" align="absmiddle"> iPhone (Safari)</li>
+<li>
+<img class="emoji" title=":thumbsup:" alt=":thumbsup:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/thumbsup.png" height="20" width="20" align="absmiddle"> iPad (Safari)</li>
+<li>
+<img class="emoji" title=":thumbsup:" alt=":thumbsup:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/thumbsup.png" height="20" width="20" align="absmiddle"> OS X (Safari)</li>
+<li>
+<img class="emoji" title=":thumbsdown:" alt=":thumbsdown:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/thumbsdown.png" height="20" width="20" align="absmiddle"> Chrome</li>
+<li>
+<img class="emoji" title=":question:" alt=":question:" src="https://a248.e.akamai.net/assets.github.com/images/icons/emoji/question.png" height="20" width="20" align="absmiddle"> Android</li>
+</ul><h3>
+<a name="learn-more" class="anchor" href="#learn-more"><span class="octicon octicon-link"></span></a>Learn More</h3>
+
+<p>Learn more on what Wallop can do, how to configure it, and how to set it up <a href="https://github.com/maddox/wallop">in the GitHub repo</a>.</p>
+        </section>
+
+        <footer>
+          Wallop is maintained by <a href="https://github.com/maddox">maddox</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
