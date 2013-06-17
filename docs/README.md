@@ -63,7 +63,7 @@ Wallop, of course, will stream the tuned content via HLS.
 
 This method will tell Wallop to prepare a channel for streaming. It will tune your HDHomeRun and begin transcoding.
 
-* **channel**: The numeric channel you want to tune and prepare for streaming.
+* **channel**: The numeric channel you want to tune and prepare for streaming. `570`
 
 **Returns:** Nothing.
 
@@ -73,7 +73,7 @@ Use this method to check the status of the transcode. This will return a JSON ob
 
 Use the `ready` key in the returned object to determine if it is ready to stream or not.
 
-* **channel**: The numeric channel you want to tune and prepare for streaming.
+* **channel**: The numeric channel you want to tune and prepare for streaming. `570`
 
 **Returns:**
 
@@ -90,7 +90,7 @@ Use the `ready` key in the returned object to determine if it is ready to stream
 
 This method will tell Wallop to immediatly stop the transcode session for the tuned channel.
 
-* **channel**: The numeric channel you want to stop streaming.
+* **channel**: The numeric channel you want to stop streaming. `570`
 
 **Returns:** Nothing.
 
@@ -98,7 +98,7 @@ This method will tell Wallop to immediatly stop the transcode session for the tu
 
 This method will simply redirect you to the raw MPEG2 stream off of the HDHomeRun.
 
-* **channel**: The numeric channel you want to tune and prepare for streaming.
+* **channel**: The numeric channel you want to tune and prepare for streaming. `570`
 
 **Returns:** nothing.
 
@@ -106,6 +106,6 @@ This method will simply redirect you to the raw MPEG2 stream off of the HDHomeRu
 
 This is the direct URL to the HLS stream once the transcode session is `ready`. Be sure not to apply this until the session reports that it is `ready`.
 
-* **channel**: The numeric channel you want to tune and prepare for streaming.
+* **channel**: The numeric channel you want to tune and prepare for streaming. `570`
 
 **Returns:** HLS STREAM!
