@@ -15,5 +15,4 @@ vendor/gems
 vendor/bundle
 .DS_Store
 log
-config/config.toml
 config/favorite_channels.json
