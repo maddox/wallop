@@ -61,11 +61,16 @@ Wallop, of course, will stream the tuned content via HLS.
 
 ### `POST` /channels/:channel/tune
 
-This method will tell Wallop to prepare a channel for streaming. It will tune your HDHomeRun and begin transcoding.
+This method will tell Wallop to prepare a channel for streaming. It will tune your HDHomeRun and begin transcoding. You can optionally pass in parameters for what resolution and bitrate you would like to transcode with. This is helpful for low bandwidth situations like over cellular data or slow Wi-Fi.
 
 * **channel**: The numeric channel you want to tune and prepare for streaming. `570`
 
 **Returns:** Nothing.
+
+#### Parameters
+
+* **resolution**: (OPTIONAL) The resolution you want to transcode to. You'll want this to be an aspect of 16x9. This defaults to `1280x720`.
+* **bitrate**: (OPTIONAL) The bitrate you want to transcode to. Format `2000k`. This defaults to `3000k`.
 
 ### `GET` /channels/:channel/status
 
