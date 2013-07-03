@@ -103,7 +103,7 @@ After updating the code, run:
 script/update
 ```
 
-This will fullfill any new dependencies as well as anything else that needs to happen after an update.
+This will fulfill any new dependencies as well as anything else that needs to happen after an update.
 
 ### Configuring
 
