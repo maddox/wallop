@@ -1,10 +1,14 @@
 $ ->
+  timer = null
 
   videoPlayer = ->
     $("#video-player")[0]
 
   statusUrl = ->
     $('#video-player').data('status-url')
+
+  tuneUrl = ->
+    $('#video-player').data('tune-url')
 
   playUrl = ->
     $('#video-player').data('play-url')
@@ -29,6 +33,19 @@ $ ->
     $('.alert').append(message)
 
     $('.alert').hide() if not title? and not message?
+
+  tune = ->
+    console.log('tuning channel')
+    $.ajax tuneUrl(),
+      type: 'post'
+      dataType: 'json'
+      beforeSend: (jqXHR) ->
+        jqXHR.setRequestHeader("Accept", "application/json")
+        startLoading("Tuning channel...")
+      success: (data, textStatus, jqXHR) ->
+        timer = setInterval ->
+          checkStatus()
+        , 1000
 
   play = ->
     deviceAgent = navigator.userAgent.toLowerCase()
@@ -55,10 +72,11 @@ $ ->
             clearInterval(timer)
             stopLoading('Stream is ready!', 'The stream is ready to play.')
             play()
+        error: (jqXHR, textStatus, errorThrown) ->
+          console.log(textStatus)
+          console.log(errorThrown)
+          tune()
 
 
   if videoPlayer()?
     checkStatus()
-    timer = setInterval ->
-      checkStatus()
-    , 1000
