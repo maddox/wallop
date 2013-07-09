@@ -11,6 +11,7 @@ EventMachine.run do
       end
 
       before do
+        Wallop.request_host = request.host
         content_type :json
       end
 
