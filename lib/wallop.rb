@@ -98,7 +98,14 @@ module Wallop
   end
 
   def self.lineup
-    JSON.parse(open(hdhomerun_lineup_url).read)
+    lineup = JSON.parse(open(hdhomerun_lineup_url).read)
+    lineup.each do |l|
+      if config['channel_logos'][l['GuideNumber']]
+        l['LogoUrl'] = "#{request_url}/logos/#{config['channel_logos'][l['GuideNumber']]}"
+      else
+        l['LogoUrl'] = nil
+      end
+    end
   end
 
   def self.hd_lineup
