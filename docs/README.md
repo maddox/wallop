@@ -21,7 +21,8 @@ Wallop will return your available channels as well as keep track of your favorit
 ``` json
 {
 "GuideNumber":"570",
-"GuideName":"ESPN HD"
+"GuideName":"ESPN HD",
+"LogoUrl":"http://192.168.1.23:888/logos/cbs.png"
 }
 ```
 

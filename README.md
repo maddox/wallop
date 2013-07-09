@@ -134,6 +134,22 @@ The port that the server will run on.
 ##### `hd_start`
 The start channel of your HD channels. Most providers start all of their HD channels at a certain number. Providing this number will let you browse JUST your HD channels.
 
+### Network Logos
+
+Wallop supports the serving of Network Logos if you configure your channels to use them. Within the `config.toml` file, you can map your channels to images. Just map the channel number to a file name and place those files into `/app/public/logos`. Wallop will send the logo urls along in its JSON response to services talking to it.
+
+```
+[channel_logos]
+506 = "cbs.png"
+508 = "abc.png"
+511 = "fox.png"
+512 = "nbc.png"
+```
+
+you can see that `cbs.png` corresponds to:
+
+![](/app/public/logos/cbs.png)
+
 ## Logs
 
 Logs are written out to the `log` directory.
