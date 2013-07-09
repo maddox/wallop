@@ -5,6 +5,18 @@ module Wallop
   OLD_LOG_PATH = 'log/wallop.old.log'
   FAVORITE_CHANNELS_PATH = 'config/favorite_channels.json'
 
+  def self.request_host
+    @request_host
+  end
+
+  def self.request_host=(host)
+    @request_host = host
+  end
+
+  def self.request_url
+    "http://#{request_host}:8888"
+  end
+
   def self.logger
     @logger ||= Logger.new(LOG_PATH)
   end
