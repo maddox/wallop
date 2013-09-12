@@ -100,7 +100,7 @@ EventMachine.run do
         send_file(File.join(Wallop.transcoding_path, "#{session[:channel]}.m3u8"))
       end
 
-      get %r{/([\.\d+].ts)} do
+      get %r{/([\.\d]+.ts)} do
         content_type :ts
         send_file(File.join(Wallop.transcoding_path, params[:captures].first))
       end
