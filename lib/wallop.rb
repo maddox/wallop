@@ -90,7 +90,7 @@ module Wallop
   end
 
   def self.raw_stream_url_for_channel(channel)
-    "http://#{config['hdhomerun_host']}:5004/auto/v#{channel}"
+    "http://#{config['hdhomerun_host']}:5004/#{config['hdhomerun_tuner']}/v#{channel}"
   end
 
   def self.hdhomerun_lineup_url

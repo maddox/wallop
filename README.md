@@ -118,6 +118,7 @@ You can edit these settings via the `config/config.toml` file.
 
 ```toml
 hdhomerun_host = "192.168.1.13"
+hdhomerun_tuner = "auto"
 ffmpeg_path = "/usr/local/bin/ffmpeg"
 transcoding_path = "./tmp"
 port = "8888"
@@ -126,6 +127,9 @@ hd_start = 500
 
 ##### `hdhomerun_host`
 The IP address of your HDHomeRun Prime on your network.
+
+##### `hdhomerun_tuner`
+This is the tuner on the hdhomerun that wallop will use. Since the HDHomeRun PRIME has 3 tuners, the options are "tuner0", "tuner1", "tuner2", or "auto" (default).
 
 ##### `ffmpeg_path`
 The path to your FFMPEG binary.
