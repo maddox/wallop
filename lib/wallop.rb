@@ -66,7 +66,10 @@ module Wallop
       if session[:last_read].to_i < Time.now.to_i - 60
         Wallop.logger.info "KILLING SESSION - #{key} - #{session[:pid]}"
         if Process.kill('QUIT', session[:pid])
-          Process::waitpid(session[:pid])
+          begin
+            Process::waitpid(session[:pid])
+          rescue Errno::ECHILD
+          end
           cleanup_channel(key)
           sessions.delete(key)
         end
@@ -87,6 +90,7 @@ module Wallop
 
     # delete all segments
     rm(Dir.glob("#{transcoding_path}/#{channel}*.ts"))
+  rescue Errno::ENOENT
   end
 
   def self.raw_stream_url_for_channel(channel)
