@@ -74,7 +74,12 @@ module Wallop
           sessions.delete(key)
         end
       else
-        if Process::waitpid(session[:pid], Process::WNOHANG)
+        begin
+          dead = Process::waitpid(session[:pid], Process::WNOHANG)
+        rescue Errno::ECHILD
+          dead = true
+        end
+        if dead
           Wallop.logger.info "SESSSION COMPLETED - CLEANING UP - #{key} - #{session[:pid]}"
           cleanup_channel(key)
           sessions.delete(key)
