@@ -74,7 +74,7 @@ EventMachine.run do
 
         Wallop.logger.info "MANUALLY STOPPING SESSION - #{session[:channel]} - #{session[:pid]}"
         if Process.kill('QUIT', session[:pid])
-          Process::waitpid(session[:pid])
+          Process::waitpid(session[:pid]) rescue nil
           Wallop.cleanup_channel(session[:channel])
           Wallop.sessions.delete(session[:channel])
         end
