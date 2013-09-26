@@ -102,7 +102,7 @@ module Wallop
   end
 
   def self.lineup
-    lineup = JSON.parse(open(hdhomerun_lineup_url).read)
+    lineup = @lineup ||= JSON.parse(open(hdhomerun_lineup_url).read)
     lineup.each do |l|
       if config['channel_logos'][l['GuideNumber']]
         l['LogoUrl'] = "#{request_url}/logos/#{config['channel_logos'][l['GuideNumber']]}"
@@ -113,7 +113,7 @@ module Wallop
   end
 
   def self.hd_lineup
-    lineup.delete_if{|l| l['GuideNumber'].to_i < config['hd_start']}
+    lineup.select{|l| l['GuideNumber'].to_i >= config['hd_start']}
   end
 
   def self.stream_url_for_channel(channel)
