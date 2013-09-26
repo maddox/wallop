@@ -43,7 +43,7 @@ You should have a modern version of FFMPEG compiled and installed. I'd suggest y
 
 ```
 $ cp vendor/libaacplus.rb /usr/local/Library/Formula/
-$ sudo brew install vendor/ffmpeg.rb --HEAD --with-fdk-aac --with-libaacplus --with-libvo-aacenc --with-schroedinger --with-opencore-amr
+$ sudo brew install vendor/ffmpeg.rb --with-fdk-aac --with-libaacplus --with-libvo-aacenc --with-schroedinger --with-opencore-amr --disable-stripping
 ```
 
 ### Quickie Set Up
