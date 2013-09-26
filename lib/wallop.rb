@@ -26,7 +26,7 @@ module Wallop
   end
 
   def self.ffmpeg_command(channel, resolution='1280x720', bitrate='3000k')
-    %{exec #{config['ffmpeg_path']} -i #{raw_stream_url_for_channel(channel)} -async 1 -ss 00:00:05 -acodec libfdk_aac -vbr 3 -b:v #{bitrate} -ac 2 -vcodec libx264 -preset superfast  -tune zerolatency  -threads 2 -s #{resolution} -flags -global_header -fflags +genpts -map 0:0 -map 0:1 -hls_time 2 -hls_wrap 40 #{transcoding_path}/#{channel}.m3u8 >/dev/null 2>&1}
+    %{exec #{config['ffmpeg_path']} -i #{raw_stream_url_for_channel(channel)} -ss 00:00:05 -loglevel info -bufsize 75Mi -async 1 -ac 6 -acodec libfdk_aac -b:v #{bitrate} -minrate #{bitrate.gsub(/\d+/){ |o| (o.to_i * 0.80).to_i }} -maxrate #{bitrate} -vcodec libx264 -preset superfast -tune zerolatency -threads 0 -s #{resolution} -flags -global_header -fflags +genpts -map 0:0 -map 0:1 -hls_time 2 -hls_wrap 40 #{transcoding_path}/#{channel}.m3u8 >log/ffmpeg.log 2>&1}
   end
 
   def self.sessions
