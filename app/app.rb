@@ -1,4 +1,5 @@
-require 'app/boot'
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__))
+require 'boot'
 require 'sinatra/base'
 
 module Wallop
