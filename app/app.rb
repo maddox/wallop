@@ -116,7 +116,7 @@ module Wallop
     end
 
     aget '/channels/:channel.:timestamp.png' do
-      Wallop.snapshot(params[:channel]) do |file|
+      Wallop.snapshot(params[:channel], params[:size]) do |file|
         async_schedule{ cache_control :no_cache; redirect "/snapshots/#{file}" }
         EM.add_timer(60){ FileUtils.rm_f "app/public/snapshots/#{file}" }
       end
