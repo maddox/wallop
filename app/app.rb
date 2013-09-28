@@ -116,14 +116,14 @@ module Wallop
     end
 
     aget '/channels/:channel.:timestamp.png' do
-      Wallop.snapshot(params[:channel], params[:size]) do |file|
+      Wallop.snapshot(params[:channel], params[:width]) do |file|
         async_schedule{ cache_control :no_cache; redirect "/snapshots/#{file}" }
         EM.add_timer(60){ FileUtils.rm_f "app/public/snapshots/#{file}" }
       end
     end
 
     get '/channels/:channel.png' do
-      redirect "/channels/#{params[:channel]}.#{Time.now.to_i}.png"
+      redirect "/channels/#{params[:channel]}.#{Time.now.to_i}.png?width=#{params[:width]}"
     end
 
     get '/channels/:channel' do
