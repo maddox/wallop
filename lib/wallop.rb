@@ -109,6 +109,7 @@ module Wallop
   def self.lineup
     lineup = @lineup ||= JSON.parse(open(hdhomerun_lineup_url).read)
     lineup.each do |l|
+      l['Favorite'] = false
       if config['channel_logos'][l['GuideNumber']]
         l['LogoUrl'] = "#{request_url}/logos/#{config['channel_logos'][l['GuideNumber']]}"
       else
@@ -126,7 +127,9 @@ module Wallop
   end
 
   def self.favorite_lineup
-    favorite_channels.map{|c| lineup.detect{|l| c == l['GuideNumber']} }
+    favorite_channels.map{|c| lineup.detect{|l| c == l['GuideNumber']} }.each do |l|
+      l['Favorite'] = true
+    end
   end
 
   def self.favorite_channels
@@ -157,4 +160,3 @@ module Wallop
   end
 
 end
-
