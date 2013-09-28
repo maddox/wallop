@@ -29,6 +29,16 @@ module Wallop
     %{exec #{config['ffmpeg_path']} -threads 4 -f mpegts -analyzeduration 2000000 -i #{raw_stream_url_for_channel(channel)} -bufsize 100Mi -loglevel warning -async 1 -ac 6 -acodec libfdk_aac -b:v #{bitrate} -minrate #{bitrate.gsub(/\d+/){ |o| (o.to_i * 0.80).to_i }} -maxrate #{bitrate} -vcodec libx264 -preset ultrafast -tune zerolatency -s #{resolution} -flags -global_header -fflags +genpts -map 0:0 -map 0:1 -hls_time 5 -hls_wrap 40 #{transcoding_path}/#{channel}.m3u8 >log/ffmpeg.log 2>&1}
   end
 
+  def self.snapshot_command(channel)
+    file = "#{channel}-#{Time.now.to_i}.png"
+    [%{#{config['ffmpeg_path']} -r 1 -f mpegts -analyzeduration 2000000 -i #{raw_stream_url_for_channel(channel)} -vcodec png -map 0:0 -an -sn -updatefirst 1 -t 00:00:01 -s 1280x720 app/public/snapshots/#{file} -loglevel quiet}, file]
+  end
+
+  def self.snapshot(channel)
+    cmd, file = snapshot_command(channel)
+    EM.system(cmd){ yield file }
+  end
+
   def self.sessions
     @sessions ||= {}
   end

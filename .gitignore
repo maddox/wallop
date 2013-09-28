@@ -19,3 +19,4 @@ config/favorite_channels.json
 app/public/logos/*png
 app/public/logos/*gif
 app/public/logos/*jpg
+app/public/snapshots/*
