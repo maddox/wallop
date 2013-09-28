@@ -5,4 +5,4 @@ set -e
 script/splash
 
 echo "==> Installing gem dependencies…"
-bundle install --binstubs --local --path vendor/gems --quiet
+bundle install --standalone --binstubs --local --path vendor/gems --quiet
