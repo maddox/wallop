@@ -115,21 +115,25 @@ module Wallop
       else
         l['LogoUrl'] = nil
       end
+      if favorite_channels.include?(l['GuideNumber'])
+        l['Favorite'] = true
+      end
+      if l['GuideNumber'].to_i >= config['hd_start']
+        l['HD'] = true
+      end
     end
   end
 
+  def self.favorite_lineup
+    lineup.select{|l| l['Favorite'] }
+  end
+
   def self.hd_lineup
-    lineup.select{|l| l['GuideNumber'].to_i >= config['hd_start']}
+    lineup.select{|l| l['HD'] }
   end
 
   def self.stream_url_for_channel(channel)
     "http://#{config['hdhomerun_host']}:5004/auto/v#{channel}"
-  end
-
-  def self.favorite_lineup
-    favorite_channels.map{|c| lineup.detect{|l| c == l['GuideNumber']} }.each do |l|
-      l['Favorite'] = true
-    end
   end
 
   def self.favorite_channels
