@@ -1,12 +1,16 @@
 $LOAD_PATH.unshift File.join(File.dirname(__FILE__))
 require 'boot'
 require 'sinatra/base'
+require 'async_sinatra'
+require 'fileutils'
 
 module Wallop
   class App < Sinatra::Base
     #register Sinatra::Reloader if RACK_ENV == 'development'
+    register Sinatra::Async
     enable :logging
     use Rack::CommonLogger, Wallop.logger
+    set :bind, '0.0.0.0'
     set :port, Wallop.config['port']
 
     configure do
@@ -43,8 +47,12 @@ module Wallop
         @channels = Wallop.lineup
       end
 
-      content_type :html; halt erb :channels if request.accept.include?('text/html')
-      JSON.dump({:channels => @channels})
+      if request.accept && request.accept?('text/html')
+        content_type :html
+        erb :channels
+      else
+        JSON.dump({:channels => @channels})
+      end
     end
 
     post '/channels/:channel/tune' do
@@ -90,7 +98,6 @@ module Wallop
       redirect Wallop.raw_stream_url_for_channel(params[:channel])
     end
 
-
     get '/channels/:channel.m3u8' do
       content_type :m3u8
 
@@ -109,12 +116,24 @@ module Wallop
       send_file(File.join(Wallop.transcoding_path, params[:captures].first))
     end
 
+    aget '/channels/:channel.:timestamp.png' do
+      Wallop.snapshot(params[:channel], params[:width]) do |file|
+        async_schedule{ cache_control :no_cache; redirect "/snapshots/#{file}" }
+        EM.add_timer(60){ FileUtils.rm_f "app/public/snapshots/#{file}" }
+      end
+    end
+
+    get '/channels/:channel.png' do
+      redirect "/channels/#{params[:channel]}.#{Time.now.to_i}.png?width=#{params[:width]}"
+    end
+
     get '/channels/:channel' do
       content_type :html
 
       @channel = params[:channel]
       erb :channel
     end
+
 
   end
 end
