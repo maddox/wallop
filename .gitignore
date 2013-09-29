@@ -16,6 +16,7 @@ vendor/bundle
 .DS_Store
 log
 config/favorite_channels.json
+config/config.toml
 app/public/logos/*png
 app/public/logos/*gif
 app/public/logos/*jpg
