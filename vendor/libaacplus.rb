@@ -39,3 +39,12 @@ __END__
  AC_CONFIG_MACRO_DIR([m4])
  # Checks for programs.
  AC_PROG_CC
+--- a/Makefile.am 2010-11-10 13:27:45.000000000 -0800
++++ b/Makefile.am.new 2013-10-30 11:21:58.000000000 -0700
+@@ -1,5 +1,5 @@
+
+-SUBDIRS = src include patches frontend
++SUBDIRS = src include patches
+
+ if HAVE_PKGCONFIG
+     pkgconfigdir = $(libdir)/pkgconfig
