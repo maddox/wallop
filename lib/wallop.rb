@@ -26,7 +26,7 @@ module Wallop
   end
 
   def self.ffmpeg_command(channel, resolution='1280x720', bitrate='3000k')
-    %{exec #{config['ffmpeg_path']} -threads 4 -f mpegts -analyzeduration 2000000 -i #{raw_stream_url_for_channel(channel)} -bufsize 100Mi -loglevel warning -async 1 -ac 2 -acodec libfdk_aac -b:v #{bitrate} -minrate #{bitrate.gsub(/\d+/){ |o| (o.to_i * 0.80).to_i }} -maxrate #{bitrate} -vcodec libx264 -preset superfast -tune zerolatency -s #{resolution} -flags -global_header -fflags +genpts -map 0:0 -map 0:1 -hls_time 2 -hls_wrap 40 #{transcoding_path}/#{channel}.m3u8 >log/ffmpeg.log 2>&1}
+    %{exec #{config['ffmpeg_path']} -threads 4 -f mpegts -analyzeduration 2000000 -i #{raw_stream_url_for_channel(channel)} -bufsize 100Mi -loglevel warning -async 1 -ac 2 -acodec libfdk_aac -b:v #{bitrate} -minrate #{bitrate.gsub(/\d+/){ |o| (o.to_i * 0.80).to_i }} -maxrate #{bitrate} -vcodec libx264 -preset superfast -tune zerolatency -s #{resolution} -flags -global_header -fflags +genpts -map 0:0 -map 0:1 -hls_time 2 -hls_wrap 40 #{playlist_file_path(channel)} > #{channel_transcoding_path(channel)}/live-ffmpeg.log 2>&1}
   end
 
   def self.snapshot_command(channel, width=nil)
@@ -48,6 +48,14 @@ module Wallop
     File.expand_path(config['transcoding_path'])
   end
 
+  def self.channel_transcoding_path(channel)
+    File.join(transcoding_path, "channel-#{channel}")
+  end
+
+  def self.playlist_file_path(channel)
+    File.join(self.channel_transcoding_path(channel), "live.m3u8")
+  end
+
   def self.setup
     # create log and transcoding directories
     ["log", transcoding_path].each do |dir|
@@ -58,14 +66,24 @@ module Wallop
     mv(LOG_PATH, OLD_LOG_PATH) if File.exists?(LOG_PATH)
     Wallop.logger.info "Starting up"
   end
-
+  
+  def self.tune(channel, resolution, bitrate)
+    cleanup_channel(channel)
+    logger.info "Tuning channel #{channel} with quality settings of #{resolution} @ #{bitrate}"
+    mkdir_p(channel_transcoding_path(channel)) unless File.directory?(channel_transcoding_path(channel))
+    pid  = POSIX::Spawn::spawn(Wallop.ffmpeg_command(channel, resolution, bitrate))
+    Process::waitpid(pid, Process::WNOHANG)
+    logger.info "Creating session for channel #{channel}"
+    sessions[channel] = {:channel => channel, :pid => pid, :ready => false, :last_read => Time.now}
+  end
+  
   def self.sweep_sessions
     sessions.each do |key, session|
       # check the status of the stream and if its ready to stream yet
       # If it isn't ready, check to see if it is ready
       if !session[:ready]
         Wallop.logger.info "CHECKING READY STATUS OF SESSION - #{session.inspect}"
-        if File.exists?(File.join(transcoding_path, "#{session[:channel]}.m3u8"))
+        if File.exists?(self.playlist_file_path(session[:channel]))
           Wallop.logger.info "SESSION READY - #{session.inspect}"
           session[:ready] = true
         end
@@ -82,7 +100,6 @@ module Wallop
           rescue Errno::ECHILD
           end
           cleanup_channel(key)
-          sessions.delete(key)
         end
       else
         begin
@@ -93,19 +110,20 @@ module Wallop
         if dead
           Wallop.logger.info "SESSSION COMPLETED - CLEANING UP - #{key} - #{session[:pid]}"
           cleanup_channel(key)
-          sessions.delete(key)
         end
       end
     end
   end
 
   def self.cleanup_channel(channel)
+    sessions.delete(channel)
+
     # delete playlist
-    playlist_file_path = File.join(transcoding_path, "#{channel}.m3u8")
-    rm(playlist_file_path) if File.exists?(playlist_file_path)
+    file = self.playlist_file_path(channel)
+    rm(file) if File.exists?(file)
 
     # delete all segments
-    rm(Dir.glob("#{transcoding_path}/#{channel}*.ts"))
+    rm(Dir.glob("#{channel_transcoding_path(channel)}/live*.ts"))
   rescue Errno::ENOENT
   end
 
