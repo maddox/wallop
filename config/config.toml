@@ -9,3 +9,8 @@ hd_start = 500
 508 = "abc.png"
 511 = "fox.png"
 512 = "nbc.png"
+
+#[schedulesdirect]
+#java = "java"
+#username = "user"
+#password = "password"

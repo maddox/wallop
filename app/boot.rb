@@ -18,5 +18,7 @@ $LOAD_PATH.unshift File.expand_path("#{RACK_ROOT}/lib")
 
 require 'extensions'
 require 'wallop'
+require 'dvr'
+require 'epg'
 
 Wallop.setup

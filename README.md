@@ -200,6 +200,26 @@ Chrome won't play the HLS stream natively, and [JWPlayer](http://www.longtailvid
 
 I don't have any Android devices, nor do I have any experience with them. So your milage may vary. I'd love to hear some feedback via [issues](https://github.com/maddox/wallop/issues)
 
+### Basic DVR Functionality
+
+#### Requirements
+
+ * A schedulesdirect.org account setup with your TV's channel lineup
+ * Have Java installed (Used the get the electronic program guide)
+ 
+#### Setup
+
+ 1. Update the `config/config.toml` file and uncomment the `[schedulesdirect]` section.  Configure it with your schedulesdirect.org account information.
+ 2. Update the `config/recording.json` file to setup recordings. Add a json entry for each show you want to record.  Hopefully the format is self explanatory.  Really needs an web based editor.  Example entry:
+
+        {
+          "channel":"685", 
+          "series":{ 
+            "title":"Vanderpump Rules", 
+            "first_run":true, 
+            "file":"/shows/${title}-S${season}E${episode}.mkv"
+          }
+        } 
 
 ## Contributing
 

@@ -139,6 +139,7 @@ end
 
 EM.next_tick do
   EventMachine.add_periodic_timer(0.5) { Wallop.sweep_sessions }
+  EventMachine.add_periodic_timer(1) { DVR.record }
 end
 
 Wallop::App.run!(:Port => Wallop.config['port'])
