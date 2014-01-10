@@ -14,10 +14,6 @@ module DVR
     config['schedulesdirect']['epg'] || File.join(Wallop.transcoding_path, "sdjson.epg")
   end
 
-  def self.epg_path 
-    config['schedulesdirect']['epg'] || File.join(Wallop.transcoding_path, "sdjson.epg")
-  end
-
   def self.dead?(pid) 
     begin
       dead = Process::waitpid(pid, Process::WNOHANG)
@@ -39,7 +35,6 @@ module DVR
   end
 
   def self.refresh_upcoming_recodings
-    config_file = config['recording'] || "config/recording.json"
     if !@epg_scanning && !@epg_update_pid && File.exist?(config_file) && config['schedulesdirect']
       @epg_scanning = true
       EM.defer do 
@@ -73,6 +68,10 @@ module DVR
     %{exec #{config['ffmpeg_path']} -i '#{Wallop.playlist_file_path(channel)}' -loglevel warning -threads 1 -t #{duration} -c copy '#{file}' > #{Wallop.channel_transcoding_path(channel)}/recording-ffmpeg.log 2>&1}
   end
 
+  def self.config_file
+    config['recording'] || "config/recording.json"
+  end
+  
   def self.record
     now = Time.now
 
@@ -90,7 +89,6 @@ module DVR
     end
     
     # Do we need to reload the upcoming_recodings?
-    config_file = config['recording'] || "config/recording.json"
     if File.exist?(config_file) && ( File.mtime(config_file)!=@config_file_mtime || !@upcoming_recodings )
       refresh_upcoming_recodings
     end

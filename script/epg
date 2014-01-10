@@ -1,0 +1,2 @@
+#!/bin/sh
+exec bundle exec ruby app/epg.rb $*

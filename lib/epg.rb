@@ -75,7 +75,7 @@ class EPG
     }
     result
   end
-
+  
   def longest_value(x) 
     if x 
       x.values.group_by(&:size).max.last.first
@@ -139,7 +139,7 @@ class EPG
                 file = file.gsub('${season}', "")
                 file = file.gsub('${episode}', "")
               end
-              result << {:channel=> channel, :at=>program[:at], :duration=>program[:duration], :file=>file, :priority=>priority }
+              result << {:channel=> channel, :at=>program[:at], :duration=>program[:duration], :file=>file, :priority=>priority, :title=>program[:title] }
               priority += 1 
             end
           end
@@ -181,7 +181,3 @@ class EPG
   end
 
 end
-
-# EPG.open("tmp/sdjson.epg") do |epg|
-#   puts epg.show_search(ARGV[0])
-# end
