@@ -110,7 +110,7 @@ module Wallop
       send_file(Wallop.playlist_file_path(session[:channel]))
     end
 
-    get %r{/channels/([\.\d])/(live[\.\d]+.ts)} do
+    get %r{/channels/(\d+)/(live\d+.ts)} do
       content_type :ts
       send_file(File.join(Wallop.channel_transcoding_path(params[:captures][0]), params[:captures][1]))
     end
