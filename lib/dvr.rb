@@ -128,6 +128,7 @@ module DVR
         # Should we start the off the recording process...
         if session[:ready] && !session[:recording_pid] && !File.exist?(recording[:file]) && duration > 0
           session[:recording] = recording
+          loger.info "Recording channel #{channel} (#{recording[:title]}) to recording[:file]"
           session[:recording_pid] = POSIX::Spawn::spawn(recording_command(channel, duration, recording[:file]))
         end
       end
