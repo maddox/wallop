@@ -19,7 +19,7 @@ GEM
     rack-test (0.6.2)
       rack (>= 1.0)
     rake (10.0.4)
-    rubyzip (1.1.0)
+    rubyzip (0.9.9)
     sinatra (1.4.3)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -48,7 +48,7 @@ DEPENDENCIES
   json (~> 1.7.7)
   posix-spawn (~> 0.3.6)
   rake
-  rubyzip
+  rubyzip (~> 0.9.9)
   sinatra (~> 1.4.3)
   sinatra-contrib (~> 1.4.1)
   thin (~> 1.5.1)

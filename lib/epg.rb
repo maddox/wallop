@@ -1,4 +1,4 @@
-require 'zip'
+require 'zip/zip'
 require 'json'
 require 'date'
 
@@ -22,7 +22,7 @@ class EPG
   end
   
   def initialize(file="sdjson.epg")
-    @zip = Zip::File.open(file)
+    @zip = Zip::ZipFile.open(file)
   end
   
   def close()
