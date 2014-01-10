@@ -1,3 +1,2 @@
 #!/bin/sh
-
-bundle exec ruby app/app.rb
+exec bundle exec ruby app/app.rb
