@@ -1,6 +1,7 @@
 require 'zip/zip'
 require 'json'
 require 'date'
+require 'set'
 
 #
 # Interface to a downloaded schedulesdirect.org Electronic Program Guide.
@@ -148,8 +149,39 @@ class EPG
     result
   end
   
+  def show_index
+    result = {}
+    channels.each do |channel, station|
+      puts "Indexing channel: #{channel} => #{station[:station_id_id]}"
+      station_schedule(station[:station_id]) .each do |program|
+        (result[program[:title]] ||= Set.new).add(channel)
+      end 
+    end
+    result.each {|k,v| result[k] = v.to_a }
+    result
+  end
+  
+  def store_show_index(file)
+      IO.write(file, JSON.dump(show_index))
+  end
+  def load_show_index(file)
+    JSON.parse(IO.read(file))
+  end
+  
+  def show_search(title, index_path="tmp/sdjson.epg.shows")
+    words = title.downcase.split
+    unless File.exist?(index_path)
+      store_show_index(index_path)
+    end
+    index = load_show_index(index_path)
+    index.select{ |k, v|
+      k = k.downcase
+      words.all? {|word| k.index(word)!=nil }
+    }
+  end
+
 end
 
-# EPG.open do |epg|
-#   puts epg.upcoming_recodings(JSON.parse(IO.read("config/recording.json")))
+# EPG.open("tmp/sdjson.epg") do |epg|
+#   puts epg.show_search(ARGV[0])
 # end
