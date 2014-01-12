@@ -1,0 +1,5 @@
+[
+  {"channel":"685", "show":{ "at":1389244356, "duration":1800, "file":"/tmp/somefile.mkv" }},
+  {"channel":"685", "series":{ "title":"Vanderpump Rules", "first_run":true, "file":"/tmp/${title}-Season ${season}/${title}-S${season}E${episode}.mkv"}},
+  {"channel":"685", "series":{ "title":"Shahs of Sunset", "first_run":false, "file":"/tmp/${title}-Season ${season}/${title}-S${season}E${episode}.mkv"}}
+]

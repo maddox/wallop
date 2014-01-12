@@ -62,12 +62,7 @@ module Wallop
       channel = params[:channel]
 
       if !Wallop.sessions.has_key?(channel)
-        Wallop.cleanup_channel(channel)
-        Wallop.logger.info "Tuning channel #{channel} with quality settings of #{resolution} @ #{bitrate}"
-        pid  = POSIX::Spawn::spawn(Wallop.ffmpeg_command(channel, resolution, bitrate))
-        Process::waitpid(pid, Process::WNOHANG)
-        Wallop.logger.info "Creating session for channel #{channel}"
-        Wallop.sessions[params[:channel]] = {:channel => channel, :pid => pid, :ready => false, :last_read => Time.now}
+        Wallop.tune(channel, resolution, bitrate)
       end
 
       JSON.dump({:status => 200, :message => 'ok'})
@@ -99,6 +94,10 @@ module Wallop
     end
 
     get '/channels/:channel.m3u8' do
+      redirect "/channels/#{channel}/live.m3u8"
+    end
+    
+    get '/channels/:channel/live.m3u8' do
       content_type :m3u8
 
       session = Wallop.sessions[params[:channel]]
@@ -108,12 +107,12 @@ module Wallop
 
       session[:last_read] = Time.now
 
-      send_file(File.join(Wallop.transcoding_path, "#{session[:channel]}.m3u8"))
+      send_file(Wallop.playlist_file_path(session[:channel]))
     end
 
-    get %r{/([\.\d]+.ts)} do
+    get %r{/channels/(\d+)/(live\d+.ts)} do
       content_type :ts
-      send_file(File.join(Wallop.transcoding_path, params[:captures].first))
+      send_file(File.join(Wallop.channel_transcoding_path(params[:captures][0]), params[:captures][1]))
     end
 
     aget '/channels/:channel.:timestamp.png' do
@@ -140,6 +139,7 @@ end
 
 EM.next_tick do
   EventMachine.add_periodic_timer(0.5) { Wallop.sweep_sessions }
+  EventMachine.add_periodic_timer(1) { DVR.record }
 end
 
 Wallop::App.run!(:Port => Wallop.config['port'])
