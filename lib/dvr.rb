@@ -53,6 +53,7 @@ module DVR
           end
         rescue Exception => e  
           EM.next_tick do
+            @epg_scanning = false
             logger.info "Error occured wile scanning the EPG: #{e.message}"
             update_epg
           end
@@ -118,9 +119,9 @@ module DVR
 
         # Make sure we are tuned to the channel.
         if !Wallop.sessions.has_key?(channel)
-          loger.info "about to tune channel #{channel} for #{recording}.  Sessions: #{Wallop.sessions}"
+          logger.info "about to tune channel #{channel} for #{recording}.  Sessions: #{Wallop.sessions}"
           Wallop.tune(channel, '1280x720', '3000k')
-          loger.info "Sessions now: #{Wallop.sessions}"
+          logger.info "Sessions now: #{Wallop.sessions}"
         end
         
         # Mark the session active so that it stays tuned.
