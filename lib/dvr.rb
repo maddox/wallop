@@ -108,7 +108,7 @@ module DVR
       # Now only figure out the active recordings and sorty by priority.
       @active_recodings =  @upcoming_recodings.select { |x| within?(now, x[:at], x[:duration]) }.sort_by{|x| x[:priority] }
       # logger.info "There are #{@active_recodings.length} active recordings." 
-             
+     
       @active_recodings.each do |recording|
         channel = recording[:channel]
         
@@ -118,7 +118,9 @@ module DVR
 
         # Make sure we are tuned to the channel.
         if !Wallop.sessions.has_key?(channel)
+          loger.info "about to tune channel #{channel} for #{recording}.  Sessions: #{Wallop.sessions}"
           Wallop.tune(channel, '1280x720', '3000k')
+          loger.info "Sessions now: #{Wallop.sessions}"
         end
         
         # Mark the session active so that it stays tuned.
