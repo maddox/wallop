@@ -38,16 +38,23 @@ module DVR
     if !@epg_scanning && !@epg_update_pid && File.exist?(config_file) && config['schedulesdirect']
       @epg_scanning = true
       EM.defer do 
-        logger.info "Scanning Electronic Program Guide for upcoming recodings."
-        EPG.open(epg_path) do |epg|
-          config_file_mtime = File.mtime(config_file)
-          upcoming_recodings = epg.upcoming_recodings(JSON.parse(IO.read(config_file)))
+        logger.info "Scanning Electronic Program Guide (EPG) for upcoming recodings."
+        begin
+          EPG.open(epg_path) do |epg|
+            config_file_mtime = File.mtime(config_file)
+            upcoming_recodings = epg.upcoming_recodings(JSON.parse(IO.read(config_file)))
+            EM.next_tick do
+              logger.info "Electronic Program Guide scan completed."
+              now = Time.now
+              @upcoming_recodings = upcoming_recodings.select { |x| now < x[:at]+x[:duration] }
+              @config_file_mtime = config_file_mtime
+              @epg_scanning = false
+            end
+          end
+        rescue Exception => e  
           EM.next_tick do
-            logger.info "Electronic Program Guide scan completed."
-            now = Time.now
-            @upcoming_recodings = upcoming_recodings.select { |x| now < x[:at]+x[:duration] }
-            @config_file_mtime = config_file_mtime
-            @epg_scanning = false
+            logger.info "Error occured wile scanning the EPG: #{e.message}"
+            update_epg
           end
         end
       end
