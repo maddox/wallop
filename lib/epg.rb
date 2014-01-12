@@ -131,7 +131,7 @@ class EPG
           if program[:title]==series["title"]
             if !series["first_run"] || program[:first_run]
               file = series["file"]
-              file = file.gsub('${title}', program[:title].gsub(/[^a-zA-Z0-9_.,'-]+/, "-"))
+              file = file.gsub('${title}', program[:title].gsub(/[^ a-zA-Z0-9_.,'-]+/, "-"))
               if program[:episode]
                 file = file.gsub('${season}', "%02d" % program[:episode][:season])
                 file = file.gsub('${episode}', "%02d" % program[:episode][:episode])
