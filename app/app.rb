@@ -58,9 +58,9 @@ module Wallop
     post '/channels/:channel/tune' do
 
       ## validate input
-      resolution = params[:resolution] =~ /^\d+x\d+$/ ? params[:resolution] : '1280x720'
-      bitrate = params[:bitrate] =~ /^\d+k$/ ? params[:bitrate] : '3000k'
-      channel = params[:channel] =~ /^\d+(.\d+)?$/ ? params[:channel] : '3'
+      resolution = params[:resolution] =~ /\A\d+x\d+\z/ ? params[:resolution] : '1280x720'
+      bitrate = params[:bitrate] =~ /\A\d+k\z/ ? params[:bitrate] : '3000k'
+      channel = params[:channel] =~ /\A\d+(.\d+)?\z/ ? params[:channel] : '3'
 
       if !Wallop.sessions.has_key?(channel)
         Wallop.cleanup_channel(channel)
