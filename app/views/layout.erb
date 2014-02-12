@@ -25,6 +25,7 @@
 
     <script type="text/coffeescript" src="/js/src/channel.coffee"></script>
     <script type="text/coffeescript" src="/js/src/favorites.coffee"></script>
+    <script type="text/coffeescript" src="/js/src/settings.coffee"></script>
     <script src="/js/coffee-script.js"> </script>
 
     <link href="http://vjs.zencdn.net/c/video-js.css" rel="stylesheet">
@@ -43,6 +44,7 @@
             <li class="<%= 'active' if params[:type] == 'favorites' %>"><a href="/channels?type=favorites">Favorites</a></li>
             <li class="<%= 'active' if params[:type] == 'hd' %>"><a href="/channels?type=hd">HD</a></li>
             <li class="<%= 'active' if params[:type] == nil %>"><a href="/channels">All</a></li>
+            <li class=""><a href="#settings" data-toggle="modal">Settings</a></li>
           </ul>
 
         </div>
@@ -52,5 +54,71 @@
     <div class="container">
       <%= yield %>
     </div>
+
+
+    <div id="settings" class="modal hide fade">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Settings</h3>
+        <p>Adjust the quality of the stream.</p>
+      </div>
+      <div class="modal-body">
+
+      <h4>Resolution</h4>
+      <label class="radio">
+        <input class="resolution-setting" name="resolution" type="radio" value="640x360">
+        640x360
+      </label>
+      <label class="radio">
+        <input class="resolution-setting" name="resolution" type="radio" value="1280x720">
+        1280x720
+      </label>
+      <label class="radio">
+        <input class="resolution-setting" name="resolution" type="radio" value="1920x1080">
+        1920x1080
+      </label>
+
+      <h4>Bitrate</h4>
+      <label class="radio">
+        <input class="bitrate-setting" name="bitrate" type="radio" value="320k">
+        320kbps
+      </label>
+      <label class="radio">
+        <input class="bitrate-setting" name="bitrate" type="radio" value="720k">
+        720kbps
+      </label>
+      <label class="radio">
+        <input class="bitrate-setting" name="bitrate" type="radio" value="1000k">
+        1mbps
+      </label>
+      <label class="radio">
+        <input class="bitrate-setting" name="bitrate" type="radio" value="2000k">
+        2mbps
+      </label>
+      <label class="radio">
+        <input class="bitrate-setting" name="bitrate" type="radio" value="3000k">
+        3mbps
+      </label>
+      <label class="radio">
+        <input class="bitrate-setting" name="bitrate" type="radio" value="4000k">
+        4mbps
+      </label>
+      <label class="radio">
+        <input class="bitrate-setting" name="bitrate" type="radio" value="6000k">
+        6mbps
+      </label>
+      <label class="radio">
+        <input class="bitrate-setting" name="bitrate" type="radio" value="8000k">
+        8mbps
+      </label>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <a href="#" data-dismiss="modal" class="btn btn-primary">OK</a>
+      </div>
+    </div>
+
   </body>
 </html>
