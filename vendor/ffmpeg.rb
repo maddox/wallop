@@ -2,10 +2,15 @@ require 'formula'
 
 class Ffmpeg < Formula
   homepage 'http://ffmpeg.org/'
-  url 'http://ffmpeg.org/releases/ffmpeg-2.0.1.tar.bz2'
-  sha1 'cc36c696228221ce14585edd90fb6413d206a5c8'
+  url 'http://ffmpeg.org/releases/ffmpeg-2.2.tar.bz2'
+  sha1 '889a3a802e2ae9de2758e55c0ccae168d6b3301a'
+  head 'git://git.videolan.org/ffmpeg.git'
 
-  head 'git://source.ffmpeg.org/ffmpeg.git'
+  bottle do
+    sha1 "3600f558473d05ecc35d346c0bc6af4e258d3ebc" => :mavericks
+    sha1 "440c33b06d74765a17edf60f430018901f0cda73" => :mountain_lion
+    sha1 "81f1e5e954bb495e27d69303ee4096844abc18bc" => :lion
+  end
 
   option "without-x264", "Disable H.264 encoder"
   option "without-lame", "Disable MP3 encoder"
@@ -20,6 +25,7 @@ class Ffmpeg < Formula
   option 'with-ffplay', 'Enable FFplay media player'
   option 'with-tools', 'Enable additional FFmpeg tools'
   option 'with-fdk-aac', 'Enable the Fraunhofer FDK AAC library'
+  option 'with-libvidstab', 'Enable vid.stab support for video stabilization'
 
   depends_on 'pkg-config' => :build
 
@@ -42,20 +48,22 @@ class Ffmpeg < Formula
   depends_on 'libaacplus' => :optional
   depends_on 'libass' => :optional
   depends_on 'openjpeg' => :optional
-  depends_on 'sdl' if build.include? 'with-ffplay'
+  depends_on 'sdl' if build.with? "ffplay"
   depends_on 'speex' => :optional
   depends_on 'schroedinger' => :optional
   depends_on 'fdk-aac' => :optional
   depends_on 'opus' => :optional
   depends_on 'frei0r' => :optional
   depends_on 'libcaca' => :optional
+  depends_on 'libbluray' => :optional
+  depends_on 'libquvi' => :optional
+  depends_on 'libvidstab' => :optional
 
   def install
     args = ["--prefix=#{prefix}",
             "--enable-shared",
             "--enable-pthreads",
             "--enable-gpl",
-            "--enable-postproc",
             "--enable-version3",
             "--enable-nonfree",
             "--enable-hardcoded-tables",
@@ -80,7 +88,7 @@ class Ffmpeg < Formula
     args << "--enable-libvo-aacenc" if build.with? 'libvo-aacenc'
     args << "--enable-libass" if build.with? 'libass'
     args << "--enable-libaacplus" if build.with? 'libaacplus'
-    args << "--enable-ffplay" if build.include? 'with-ffplay'
+    args << "--enable-ffplay" if build.with? "ffplay"
     args << "--enable-libspeex" if build.with? 'speex'
     args << '--enable-libschroedinger' if build.with? 'schroedinger'
     args << "--enable-libfdk-aac" if build.with? 'fdk-aac'
@@ -88,6 +96,8 @@ class Ffmpeg < Formula
     args << "--enable-libopus" if build.with? 'opus'
     args << "--enable-frei0r" if build.with? 'frei0r'
     args << "--enable-libcaca" if build.with? 'libcaca'
+    args << "--enable-libquvi" if build.with? 'libquvi'
+    args << "--enable-libvidstab" if build.with? 'libvidstab'
 
     if build.with? 'openjpeg'
       args << '--enable-libopenjpeg'
@@ -96,7 +106,7 @@ class Ffmpeg < Formula
 
     # For 32-bit compilation under gcc 4.2, see:
     # http://trac.macports.org/ticket/20938#comment:22
-    ENV.append_to_cflags "-mdynamic-no-pic" if Hardware.is_32_bit? && Hardware.cpu_type == :intel && ENV.compiler == :clang
+    ENV.append_to_cflags "-mdynamic-no-pic" if Hardware.is_32_bit? && Hardware::CPU.intel? && ENV.compiler == :clang
 
     system "./configure", *args
 
@@ -111,7 +121,7 @@ class Ffmpeg < Formula
 
     system "make install"
 
-    if build.include? 'with-tools'
+    if build.with? "tools"
       system "make alltools"
       bin.install Dir['tools/*'].select {|f| File.executable? f}
     end

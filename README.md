@@ -42,8 +42,11 @@ Wallop has only been tested running on OS X, though its just Ruby and FFMPEG, so
 You should have a modern version of FFMPEG compiled and installed. I'd suggest you just compile a fresh version from the most recent source. [Here](http://ffmpeg.org/trac/ffmpeg/wiki/MacOSXCompilationGuide) are good instructions on how get FFMPEG built for OS X. It's not that bad!
 
 ```
+$ brew update
 $ cp vendor/libaacplus.rb /usr/local/Library/Formula/
-$ sudo brew install vendor/ffmpeg.rb --with-fdk-aac --with-libaacplus --with-libvo-aacenc --with-schroedinger --with-opencore-amr --disable-stripping
+$ cp vendor/x264.rb /usr/local/Library/Formula/
+$ brew install x264 --HEAD
+$ brew install vendor/ffmpeg.rb --with-fdk-aac --with-libaacplus --with-libvo-aacenc --with-schroedinger --with-opencore-amr --disable-stripping
 ```
 
 ### Quickie Set Up
