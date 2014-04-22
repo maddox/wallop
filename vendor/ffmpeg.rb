@@ -2,15 +2,9 @@ require 'formula'
 
 class Ffmpeg < Formula
   homepage 'http://ffmpeg.org/'
-  url 'http://ffmpeg.org/releases/ffmpeg-2.2.tar.bz2'
-  sha1 '889a3a802e2ae9de2758e55c0ccae168d6b3301a'
+  url 'http://ffmpeg.org/releases/ffmpeg-2.2.1.tar.bz2'
+  sha1 'c5f8d103b20cd73d329401d85ced4a014757f8b9'
   head 'git://git.videolan.org/ffmpeg.git'
-
-  bottle do
-    sha1 "3600f558473d05ecc35d346c0bc6af4e258d3ebc" => :mavericks
-    sha1 "440c33b06d74765a17edf60f430018901f0cda73" => :mountain_lion
-    sha1 "81f1e5e954bb495e27d69303ee4096844abc18bc" => :lion
-  end
 
   option "without-x264", "Disable H.264 encoder"
   option "without-lame", "Disable MP3 encoder"
@@ -61,14 +55,23 @@ class Ffmpeg < Formula
 
   def install
     args = ["--prefix=#{prefix}",
-            "--enable-shared",
-            "--enable-pthreads",
+            "--as=yasm",
+            "--extra-version=wallop",
+            "--disable-shared",
+            "--disable-ffplay",
+            "--enable-static",
             "--enable-gpl",
+            "--enable-pthreads",
+            "--enable-postproc",
             "--enable-version3",
             "--enable-nonfree",
             "--enable-hardcoded-tables",
             "--enable-avresample",
             "--enable-vda",
+            "--enable-bzlib",
+            "--enable-zlib",
+            "--enable-filters",
+            "--enable-runtime-cpudetect",
             "--cc=#{ENV.cc}",
             "--host-cflags=#{ENV.cflags}",
             "--host-ldflags=#{ENV.ldflags}"
