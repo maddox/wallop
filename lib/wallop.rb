@@ -66,8 +66,8 @@ module Wallop
       if !session[:ready]
         Wallop.logger.info "CHECKING READY STATUS OF SESSION - #{session.inspect}"
         if File.exists?(File.join(transcoding_path, "#{session[:channel]}.m3u8"))
-          Wallop.logger.info "SESSION READY - #{session.inspect}"
           session[:ready] = true
+          Wallop.logger.info "SESSION READY - #{session.inspect}"
         end
 
       end
