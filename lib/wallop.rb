@@ -26,7 +26,7 @@ module Wallop
   end
 
   def self.ffmpeg_command(channel, resolution='1280x720', bitrate='3000k')
-    %{exec #{config['ffmpeg_path']} -threads #{config['ffmpeg']['threads']} -f mpegts -analyzeduration 2000000 -i #{raw_stream_url_for_channel(channel)} -ac 2 -acodec libfdk_aac -b:v #{bitrate} -minrate #{bitrate.gsub(/\d+/){ |o| (o.to_i * 0.80).to_i }} -maxrate #{bitrate} -vcodec libx264 -s #{resolution} -preset #{config['ffmpeg']['h264_preset']} -r #{config['ffmpeg']['framerate']} -hls_time #{config['ffmpeg']['hls_time']} -hls_wrap #{config['ffmpeg']['hls_wrap']} #{config['ffmpeg']['options']} #{transcoding_path}/#{channel}.m3u8 >log/ffmpeg.log 2>&1}
+    %{exec #{config['ffmpeg_path']} -threads #{config['ffmpeg']['threads']} -f mpegts -analyzeduration 2000000 -i #{raw_stream_url_for_channel(channel)} -ac 2 -acodec libfaac -b:v #{bitrate} -minrate #{bitrate.gsub(/\d+/){ |o| (o.to_i * 0.80).to_i }} -maxrate #{bitrate} -vcodec libx264 -s #{resolution} -preset #{config['ffmpeg']['h264_preset']} -r #{config['ffmpeg']['framerate']} -hls_time #{config['ffmpeg']['hls_time']} -hls_wrap #{config['ffmpeg']['hls_wrap']} #{config['ffmpeg']['options']} #{transcoding_path}/#{channel}.m3u8 >log/ffmpeg.log 2>&1}
   end
 
   def self.snapshot_command(channel, width=nil)
