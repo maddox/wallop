@@ -1,6 +1,6 @@
-include FileUtils
-
 module Wallop
+  include FileUtils
+
   LOG_PATH = 'log/wallop.log'
   OLD_LOG_PATH = 'log/wallop.old.log'
   FAVORITE_CHANNELS_PATH = 'config/favorite_channels.json'
@@ -105,7 +105,7 @@ module Wallop
     rm(playlist_file_path) if File.exists?(playlist_file_path)
 
     # delete all segments
-    rm(Dir.glob("#{transcoding_path}/#{channel}*.ts"))
+    rm(Dir.glob("#{transcoding_path}/#{channel}*.ts"), true)
   rescue Errno::ENOENT
   end
 
