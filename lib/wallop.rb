@@ -1,5 +1,5 @@
 module Wallop
-  include FileUtils
+  extend FileUtils
 
   LOG_PATH = 'log/wallop.log'
   OLD_LOG_PATH = 'log/wallop.old.log'
