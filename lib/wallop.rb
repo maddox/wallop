@@ -105,7 +105,7 @@ module Wallop
     rm(playlist_file_path) if File.exists?(playlist_file_path)
 
     # delete all segments
-    rm(Dir.glob("#{transcoding_path}/#{channel}*.ts"), true)
+    rm(Dir.glob("#{transcoding_path}/#{channel}*.ts"))
   rescue Errno::ENOENT
   end
 
