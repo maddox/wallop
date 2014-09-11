@@ -10,7 +10,7 @@ framerate = "29.97"
 h264_preset = "superfast"
 hls_time = 2
 hls_wrap = 40
-options = "-bufsize 100Mi -loglevel warning -async 1  -tune zerolatency -flags -global_header -fflags +genpts -map 0:0 -map 0:1"
+options = "-loglevel warning -async 1  -tune zerolatency -flags -global_header -fflags +genpts -map 0:0 -map 0:1"
 
 [channel_logos]
 506 = "cbs.png"
