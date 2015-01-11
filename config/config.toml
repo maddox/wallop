@@ -6,6 +6,7 @@ hd_start = 500
 
 [ffmpeg]
 threads = 4
+acodec = "libfaac"
 framerate = "29.97"
 h264_preset = "superfast"
 hls_time = 2
