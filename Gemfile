@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem "eventmachine", "~> 1.0.3"
-gem "json", "~> 1.7.7"
+gem "eventmachine", "~> 1.0.4"
+gem "json", "~> 1.8.2"
 gem "posix-spawn", "~> 0.3.6"
 gem 'rake'
 gem "sinatra", "~> 1.4.3", :require => "sinatra/base"
