@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem "eventmachine", "~> 1.0.3"
+gem "eventmachine", "~> 1.0.4"
 gem "json", "~> 1.7.7"
 gem "posix-spawn", "~> 0.3.6"
 gem 'rake'
