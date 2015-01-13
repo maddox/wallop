@@ -203,6 +203,31 @@ Chrome won't play the HLS stream natively, and [JWPlayer](http://www.longtailvid
 
 I don't have any Android devices, nor do I have any experience with them. So your milage may vary. I'd love to hear some feedback via [issues](https://github.com/maddox/wallop/issues)
 
+## Docker Image
+
+To get Wallop up and running quickly you can use the Docker image provided by
+[ipstatic](https://github.com/ipstatic). It contains everything required to run
+Wallop.
+
+On a machine that has Docker installed, pull the image down:
+
+```sh
+sudo docker pull ipstatic/wallop
+```
+
+Next setup a directory to contain the Wallop config file. Inside of this directory
+place a copy of the `config/config.toml` file. Make sure to change the following:
+
+```toml
+ffmpeg_path = "/ffmpeg/bin/ffmpeg"
+acodec = "libfdk_aac"
+```
+
+Then start the container:
+
+```sh
+sudo docker run -d -v /$config_directory:/wallop/config -p 8888:8888 ipstatic/wallop
+```
 
 ## Contributing
 
