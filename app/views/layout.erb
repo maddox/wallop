@@ -64,63 +64,93 @@
       </div>
       <div class="modal-body">
 
-      <h4>Resolution</h4>
-      <label class="radio">
-        <input class="resolution-setting" name="resolution" type="radio" value="640x360">
-        640x360
-      </label>
-      <label class="radio">
-        <input class="resolution-setting" name="resolution" type="radio" value="640x480">
-        640x480
-      </label>
-      <label class="radio">
-        <input class="resolution-setting" name="resolution" type="radio" value="720x480">
-        720x480
-      </label>
-      <label class="radio">
-        <input class="resolution-setting" name="resolution" type="radio" value="1280x720">
-        1280x720
-      </label>
-      <label class="radio">
-        <input class="resolution-setting" name="resolution" type="radio" value="1920x1080">
-        1920x1080
-      </label>
+      <% if Wallop.config['hdhr_transcode'] %>
+          <h4>Transcode Profile</h4>
+          <label class="radio">
+            <input class="profile-setting" name="profile" type="radio" value="heavy">
+            heavy
+          </label>
+          <label class="radio">
+            <input class="profile-setting" name="profile" type="radio" value="mobile">
+            mobile
+          </label>
+          <label class="radio">
+            <input class="profile-setting" name="profile" type="radio" value="internet720">
+            internet720
+          </label>
+          <label class="radio">
+            <input class="profile-setting" name="profile" type="radio" value="internet540">
+            internet540
+          </label>
+          <label class="radio">
+            <input class="profile-setting" name="profile" type="radio" value="internet480">
+            internet480
+          </label>
+          <label class="radio">
+            <input class="profile-setting" name="profile" type="radio" value="internet360">
+            internet360
+          </label>
+          <label class="radio">
+            <input class="profile-setting" name="profile" type="radio" value="internet240">
+            internet240
+          </label>
+      <% else %>
+          <h4>Resolution</h4>
+          <label class="radio">
+            <input class="resolution-setting" name="resolution" type="radio" value="640x360">
+            640x360
+          </label>
+          <label class="radio">
+            <input class="resolution-setting" name="resolution" type="radio" value="640x480">
+            640x480
+          </label>
+          <label class="radio">
+            <input class="resolution-setting" name="resolution" type="radio" value="720x480">
+            720x480
+          </label>
+          <label class="radio">
+            <input class="resolution-setting" name="resolution" type="radio" value="1280x720">
+            1280x720
+          </label>
+          <label class="radio">
+            <input class="resolution-setting" name="resolution" type="radio" value="1920x1080">
+            1920x1080
+          </label>
 
-      <h4>Bitrate</h4>
-      <label class="radio">
-        <input class="bitrate-setting" name="bitrate" type="radio" value="320k">
-        320kbps
-      </label>
-      <label class="radio">
-        <input class="bitrate-setting" name="bitrate" type="radio" value="720k">
-        720kbps
-      </label>
-      <label class="radio">
-        <input class="bitrate-setting" name="bitrate" type="radio" value="1000k">
-        1mbps
-      </label>
-      <label class="radio">
-        <input class="bitrate-setting" name="bitrate" type="radio" value="2000k">
-        2mbps
-      </label>
-      <label class="radio">
-        <input class="bitrate-setting" name="bitrate" type="radio" value="3000k">
-        3mbps
-      </label>
-      <label class="radio">
-        <input class="bitrate-setting" name="bitrate" type="radio" value="4000k">
-        4mbps
-      </label>
-      <label class="radio">
-        <input class="bitrate-setting" name="bitrate" type="radio" value="6000k">
-        6mbps
-      </label>
-      <label class="radio">
-        <input class="bitrate-setting" name="bitrate" type="radio" value="8000k">
-        8mbps
-      </label>
-
-
+          <h4>Bitrate</h4>
+          <label class="radio">
+            <input class="bitrate-setting" name="bitrate" type="radio" value="320k">
+            320kbps
+          </label>
+          <label class="radio">
+            <input class="bitrate-setting" name="bitrate" type="radio" value="720k">
+            720kbps
+          </label>
+          <label class="radio">
+            <input class="bitrate-setting" name="bitrate" type="radio" value="1000k">
+            1mbps
+          </label>
+          <label class="radio">
+            <input class="bitrate-setting" name="bitrate" type="radio" value="2000k">
+            2mbps
+          </label>
+          <label class="radio">
+            <input class="bitrate-setting" name="bitrate" type="radio" value="3000k">
+            3mbps
+          </label>
+          <label class="radio">
+            <input class="bitrate-setting" name="bitrate" type="radio" value="4000k">
+            4mbps
+          </label>
+          <label class="radio">
+            <input class="bitrate-setting" name="bitrate" type="radio" value="6000k">
+            6mbps
+          </label>
+          <label class="radio">
+            <input class="bitrate-setting" name="bitrate" type="radio" value="8000k">
+            8mbps
+          </label>
+      <% end %>
 
       </div>
       <div class="modal-footer">
