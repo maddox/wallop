@@ -8,7 +8,7 @@ $ ->
     $('#video-player').data('status-url')
 
   tuneUrl = ->
-    $('#video-player').data('tune-url') + "?resolution=" + resolution() + "&bitrate=" + bitrate()
+    $('#video-player').data('tune-url') + "?resolution=" + resolution() + "&bitrate=" + bitrate() + "&profile=" + profile() 
 
   playUrl = ->
     $('#video-player').data('play-url')
@@ -18,6 +18,9 @@ $ ->
 
   resolution = ->
     localStorage.resolution || "1280x720"
+
+  profile = ->
+    localStorage.profile || "heavy"
 
   startLoading = (title=null, message=null) ->
     spinOpts = {
