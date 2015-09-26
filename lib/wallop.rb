@@ -29,7 +29,7 @@ module Wallop
     %{exec #{config['ffmpeg_path']} -threads #{config['ffmpeg']['threads']} -f mpegts -analyzeduration 2000000 -i #{raw_stream_url_for_channel(channel)} -ac 2 -acodec #{config['ffmpeg']['acodec']} -b:v #{bitrate} -bufsize #{bitrate.to_i*2}k -minrate #{bitrate.gsub(/\d+/){ |o| (o.to_i * 0.80).to_i }} -maxrate #{bitrate} -vcodec libx264 -s #{resolution} -preset #{config['ffmpeg']['h264_preset']} -r #{config['ffmpeg']['framerate']} -hls_time #{config['ffmpeg']['hls_time']} -hls_wrap #{config['ffmpeg']['hls_wrap']} #{config['ffmpeg']['options']} #{transcoding_path}/#{channel}.m3u8 >log/ffmpeg.log 2>&1}
   end
 
-  def self.ffmpeg_no_transcode_command(channel, profile='heavy')
+  def self.ffmpeg_no_transcode_command(channel, profile='mobile')
     %{exec #{config['ffmpeg_path']} -threads #{config['ffmpeg']['threads']} -f mpegts -analyzeduration 2000000 -i #{raw_stream_url_for_channel(channel)}?transcode=#{profile} -ac 2 -acodec #{config['ffmpeg']['acodec']} -vcodec copy -hls_time #{config['ffmpeg']['hls_time']} -hls_wrap #{config['ffmpeg']['hls_wrap']} #{config['ffmpeg']['options']} #{transcoding_path}/#{channel}.m3u8 >log/ffmpeg.log 2>&1}
   end
 

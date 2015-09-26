@@ -7,7 +7,7 @@ $ ->
     localStorage.resolution || "1280x720"
 
   profile = ->
-    localStorage.profile || "heavy"
+    localStorage.profile || "mobile"
 
   loadSettings = ->
     $('.resolution-setting').each (i, e)  =>

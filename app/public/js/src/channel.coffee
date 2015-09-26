@@ -20,7 +20,7 @@ $ ->
     localStorage.resolution || "1280x720"
 
   profile = ->
-    localStorage.profile || "heavy"
+    localStorage.profile || "mobile"
 
   startLoading = (title=null, message=null) ->
     spinOpts = {
