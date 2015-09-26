@@ -64,7 +64,7 @@ module Wallop
         Wallop.cleanup_channel(channel)
         if Wallop.config['hdhr_transcode']
           ## validate transcode profile
-          profile = params[:profile] =~ /\A[a-z]+\d*\z/ ? params[:profile] : 'heavy'
+          profile = params[:profile] =~ /\A[a-z]+\d*\z/ ? params[:profile] : 'mobile'
           Wallop.logger.info "Tuning channel #{channel} with transcode profile #{profile}"
           pid  = POSIX::Spawn::spawn(Wallop.ffmpeg_no_transcode_command(channel, profile))
         else
