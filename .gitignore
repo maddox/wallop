@@ -1,4 +1,5 @@
 *.rbc
+*.swp
 .bundle
 .config
 coverage
