@@ -1,0 +1,21 @@
+hdhomerun_host = "192.168.1.13"
+hdhr_transcode = false
+ffmpeg_path = "/usr/local/bin/ffmpeg"
+transcoding_path = "./tmp"
+port = "8888"
+hd_start = 500
+
+[ffmpeg]
+threads = 4
+acodec = "libfaac"
+framerate = "29.97"
+h264_preset = "superfast"
+hls_time = 2
+hls_wrap = 40
+options = "-loglevel warning -async 1  -tune zerolatency -flags -global_header -fflags +genpts -map 0:0 -map 0:1"
+
+[channel_logos]
+506 = "cbs.png"
+508 = "abc.png"
+511 = "fox.png"
+512 = "nbc.png"
