@@ -47,7 +47,7 @@ module Wallop
         @channels = Wallop.lineup
       end
 
-      if request.accept && request.accept?('text/html')
+      if request.preferred_type.include?('text/html')
         content_type :html
         erb :channels
       else
