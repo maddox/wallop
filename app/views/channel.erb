@@ -2,8 +2,5 @@
   <div class="alert alert-block alert-info hide">
     <h4></h4>
   </div>
-  <div id="player"></div>
-    <script>
-      var player = new Clappr.Player({source: "/channels/<%= @channel %>.m3u8", parentId: "#player"});
-    </script>
-</center> 
+  <video controls id="video-player" class="hide" src="/channels/<%= @channel %>.m3u8" width="640" height="360" data-tune-url="/channels/<%= @channel %>/tune" data-play-url="/channels/<%= @channel %>.m3u8" data-status-url="/channels/<%= @channel %>/status"></video>
+</center>
