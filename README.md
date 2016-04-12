@@ -117,7 +117,7 @@ This will fulfill any new dependencies as well as anything else that needs to ha
 
 Wallop is pretty simple, but it does have a couple user configurable settings.
 
-You can edit these settings via the `config/config.toml` file.
+You can edit these settings via the `config/config.toml.example` file. Once you have updated your setting save the file back to the config directory as `config.toml`.
 
 ```toml
 hdhomerun_host = "192.168.1.13"
