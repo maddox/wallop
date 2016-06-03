@@ -62,11 +62,16 @@ $ ->
 
     $(videoPlayer()).show()
     videoPlayer().src = playUrl()
-    videoPlayer().play()
 
     if agentID && agentID[1] == 'iphone'
       window.location.href = playUrl()
 
+    if Hls.isSupported()
+      hls = new Hls();
+      hls.loadSource(playUrl());
+      hls.attachMedia(videoPlayer());
+
+    videoPlayer().play()
 
   checkStatus = ->
     $.ajax statusUrl(),
