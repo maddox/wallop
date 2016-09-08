@@ -25,7 +25,7 @@ module Wallop
     @config ||= TOML.load_file(File.join(RACK_ROOT, 'config', 'config.toml'))
   end
 
-  def self.ffmpeg_command(channel, resolution='1280x720', bitrate='3000k')
+  def self.ffmpeg_command(channel, resolution='1280x720', bitrate='1000k')
     %{exec #{config['ffmpeg_path']} -threads #{config['ffmpeg']['threads']} -f mpegts -analyzeduration 2000000 -i #{raw_stream_url_for_channel(channel)} -ac 2 -acodec #{config['ffmpeg']['acodec']} -b:v #{bitrate} -bufsize #{bitrate.to_i*2}k -minrate #{bitrate.gsub(/\d+/){ |o| (o.to_i * 0.80).to_i }} -maxrate #{bitrate} -vcodec libx264 -s #{resolution} -preset #{config['ffmpeg']['h264_preset']} -r #{config['ffmpeg']['framerate']} -hls_time #{config['ffmpeg']['hls_time']} -hls_wrap #{config['ffmpeg']['hls_wrap']} #{config['ffmpeg']['options']} #{transcoding_path}/#{channel}.m3u8 >log/ffmpeg.log 2>&1}
   end
 
