@@ -64,7 +64,7 @@ module Wallop
 
       ## validate input
       resolution = params[:resolution] =~ /\A\d+x\d+\z/ ? params[:resolution] : '1280x720'
-      bitrate = params[:bitrate] =~ /\A\d+k\z/ ? params[:bitrate] : '3000k'
+      bitrate = params[:bitrate] =~ /\A\d+k\z/ ? params[:bitrate] : '1000k'
       channel = params[:channel] =~ /\A\d+(.\d+)?\z/ ? params[:channel] : '3'
 
       if !Wallop.sessions.has_key?(channel)
@@ -144,7 +144,7 @@ module Wallop
    
       ## validate input
       resolution = params[:resolution] =~ /\A\d+x\d+\z/ ? params[:resolution] : '1280x720'
-      bitrate = params[:bitrate] =~ /\A\d+k\z/ ? params[:bitrate] : '3000k'
+      bitrate = params[:bitrate] =~ /\A\d+k\z/ ? params[:bitrate] : '1000k'
       channel = params[:channel] =~ /\A\d+(.\d+)?\z/ ? params[:channel] : '3'
       
       if !Wallop.sessions.has_key?(channel)
