@@ -1,7 +1,7 @@
 $ ->
 
   bitrate = ->
-    localStorage.bitrate || "3000k"
+    localStorage.bitrate || "1000k"
 
   resolution = ->
     localStorage.resolution || "1280x720"
