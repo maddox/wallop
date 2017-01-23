@@ -127,8 +127,14 @@ module Wallop
     lineup = @lineup ||= JSON.parse(open(hdhomerun_lineup_url).read)
     lineup.each do |l|
       l['Favorite'] = false
+
+      # To avoid toml key parsing errors, allow the use of hyphens instead of periods in config.toml logo configs (common for OTA channels)
+      guide_number_hyphens = l['GuideNumber'].sub('.','-')
+
       if config['channel_logos'][l['GuideNumber']]
         l['LogoUrl'] = "#{request_url}/logos/#{config['channel_logos'][l['GuideNumber']]}"
+      elsif config['channel_logos'][guide_number_hyphens]
+        l['LogoUrl'] = "#{request_url}/logos/#{config['channel_logos'][guide_number_hyphens]}"
       else
         l['LogoUrl'] = nil
       end
