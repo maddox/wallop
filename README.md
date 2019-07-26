@@ -1,5 +1,12 @@
 # :zap: Wallop :zap:
 
+:warning::warning::warning:
+
+This project has been discontinued. Check out what we made with the knowledge we learned by building Wallop: https://getchannels.com
+
+
+:warning::warning::warning:
+
 Wallop is a transcoding server for your [HDHomeRun Prime](https://www.silicondust.com/product/hdhomerun-prime/).
 
 Wallop lets you watch TV streams on your iPhone, iPad, Roku, Web, Android device. Even away from home.
